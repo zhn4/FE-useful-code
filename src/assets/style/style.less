@@ -1,38 +1,57 @@
 // 页面结构
-// - tab 栏（暂时保留）
-// - 搜索栏
-// - 按钮栏
-// - 列表
-// - 翻页器
+// custom-page
+//    custom-search-bar 搜索栏
+//    custom-search-content 主题内容
+//      custom-btns 功能按钮
+//      custom-list 列表（可直接用 el-table）
+//    custom-pagination 翻页器
 
-.custom-tab-bar {
-  // TODO: 保留
+// 前置 css 条件 strt
+#app {
+  height: 100vh;
+  overflow: hidden;
 }
 
-.custom-header {
+html,
+body {
+  height: 100%;
+  padding: 0;
+  margin: 0;
+}
+// 前置 css 条件 end
+
+.custom-page {
+  height: 100%;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 20px;
+  flex-direction: column;
+  padding: 20px;
+  box-sizing: border-box;
 }
 
-// 搜索栏
 .custom-search-bar {
-  // TODO: 保留
+  // 自定义分界线，可加可不加
+  // border-bottom: 1px solid rgba(0, 0, 0, .1);
   // margin-bottom: 20px;
 }
 
-// 按钮栏
-.custom-btns-bar {
+.custom-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+}
+
+.custom-btns {
   margin-bottom: 20px;
 }
 
-// 列表
-.custom-comment {
-  margin-bottom: 20px;
+.custom-list {
+  flex: 1;
+  overflow: hidden;
+  padding-bottom: 20px;
 }
 
-// 翻页器
-.custom-pager {
+.custom-pagination {
   text-align: right;
 }
