@@ -4,9 +4,22 @@
       <router-link to="/">Home</router-link> |
       <router-link to="/about">About</router-link>
     </nav> -->
+    <div class="back-btn">
+      <el-button type="primary" @click="onBack">路由返回</el-button>
+    </div>
     <router-view />
   </div>
 </template>
+
+<script>
+export default {
+  methods: {
+    onBack() {
+      this.$router.back()
+    },
+  },
+}
+</script>
 
 <style lang="less">
 #app {
@@ -27,5 +40,12 @@ nav {
       color: #42b983;
     }
   }
+}
+
+.back-btn {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 101;
 }
 </style>

@@ -4,7 +4,10 @@
       <div class="left">权责清单修订 - 意见采纳</div>
       <div class="right">
         <el-button type="primary">保存</el-button>
-        <el-button>一键下载</el-button>
+        <el-button @click="onExport">一键下载exportExcel</el-button>
+        <el-button @click="onExport2">一键下载2</el-button>
+        <el-button @click="export4json">json格式导出</el-button>
+        <el-button @click="export4DOM">DOM格式导出</el-button>
         <el-button>提交</el-button>
         <el-button>查看流程</el-button>
         <el-button>返回</el-button>
@@ -42,7 +45,7 @@
           </div>
         </div>
         <div class="bottom">
-          <el-table :data="tableData" style="width: 100%; height: 300px">
+          <el-table id="table-exprot" :data="tableData" style="width: 100%;">
             <tableHeaderRender v-for="item in tableHead" :item="item" />
           </el-table>
         </div>
@@ -53,6 +56,11 @@
 
 <script>
 import tableHeaderRender from '@/components/tableHeaderRender.vue';
+
+import { exportExcel } from '@femessage/excel-it'
+
+import { saveAs } from "file-saver";
+import XLSX from "xlsx";
 
 export default {
   name: 'handle',
@@ -186,6 +194,196 @@ export default {
           number: 123456,
         },
       ],
+    }
+  },
+  created() {
+    console.log(this.tableHead)
+    let arr = this.handleTree2Array(this.tableHead)
+    console.log(arr)
+    let data = []
+    for (let i = 0; i < 5; i++) {
+      data.push(JSON.parse(JSON.stringify(this.tableData[0])))
+    }
+    console.log(data)
+    this.tableData = data
+    console.log(this.tableData)
+  },
+  methods: {
+    handleTree2Array(arr) {
+      if (!arr) {
+        return []
+      }
+      let data = JSON.parse(JSON.stringify(arr))
+      let newData = []
+      const callback = (item) => {
+        newData.push(item)
+          ; (item.children || (item.children = [])).map((v) => {
+            callback(v)
+          })
+        delete item.children
+      }
+      data.map((v) => callback(v))
+      return newData
+    },
+    onExport() {
+      exportExcel({
+        columns: this.handleTree2Array(this.tableHead),
+        data: this.tableData,
+        fileName: 'json2excel'
+      }, () => {
+        this.loading = false
+      })
+    },
+    create_gap_rows(ws, nrows) {
+      let ref = XLSX.utils.decode_range(ws["!ref"]);       // get original range
+      ref.e.r += nrows;                                    // add to ending row
+      ws["!ref"] = XLSX.utils.encode_range(ref);           // reassign row
+    },
+    onExport2() {
+      console.log('导出多个数据')
+
+      const exportConfig = {
+        raw: true,
+        // origin: -1
+      }
+
+      document.getElementById('table-exprot').querySelector('table').setAttribute('id', 'tableHeader')
+      document.getElementById('table-exprot').querySelector('.el-table__body-wrapper').querySelector('table').setAttribute('id', 'tableBody')
+
+      let ws = XLSX.utils.table_to_book(document.getElementById('tableHeader'))
+      XLSX.utils.sheet_add_dom(ws, document.getElementById('tableBody'), exportConfig)
+      const wbout = XLSX.write(ws, {
+        bookType: "xlsx",
+        bookSST: true,
+        type: "array"
+      });
+
+      // TODO: 都能导出，但是没有合并表头
+      // let worksheet_tmp1 = XLSX.utils.table_to_book(document.getElementById('tableHeader'));
+      // let worksheet_tmp2 = XLSX.utils.table_to_sheet(document.getElementById('tableBody'));
+      // let a = XLSX.utils.sheet_to_json(worksheet_tmp1, { header: 1 })
+      // let b = XLSX.utils.sheet_to_json(worksheet_tmp2, { header: 1 })
+      // a = a.concat(['']).concat(b)
+      // let worksheet = XLSX.utils.json_to_sheet(a, { skipHeader: true })
+      // const new_workbook = XLSX.utils.book_new()
+      // XLSX.utils.book_append_sheet(new_workbook, worksheet, "worksheet")
+      // const wbout = XLSX.write(new_workbook, {
+      //   bookType: "xlsx",
+      //   bookSST: true,
+      //   type: "array"
+      // });
+
+
+      // TODO: 单独导出 header 数据
+      // document.getElementById('table-exprot').querySelector('table').setAttribute('id', 'tableHeader')
+      // console.log(document.getElementById('tableHeader'))
+      // const workbook = XLSX.utils.table_to_book(
+      //   document.querySelector('#tableHeader'),
+      //   exportConfig
+      // );
+      // // this.create_gap_rows(workbook, 1);
+
+      // TODO: 单独导出 body 数据
+      // document.getElementById('table-exprot').querySelector('.el-table__body-wrapper').querySelector('table').setAttribute('id', 'tableBody')
+      // console.log(document.getElementById('tableBody'))
+      // const workbook = XLSX.utils.table_to_book(
+      //   document.querySelector('#tableBody'),
+      //   exportConfig
+      // );
+
+      // const wbout = XLSX.write(workbook, {
+      //   bookType: "xlsx",
+      //   bookSST: true,
+      //   type: "array"
+      // });
+
+      let fileName = 'export-table'
+      saveAs(
+        new Blob([wbout], {
+          type: "application/octet-stream"
+        }),
+        `${fileName}.xlsx`
+      );
+    },
+    // TODO: 原始的导出 DEMO
+    // onExport2() {
+    //   document.getElementById('table-exprot').querySelector('table').setAttribute('id', 'tableHeader')
+    //   const workbook = XLSX.utils.table_to_book(
+    //     document.querySelector('#tableHeader'),
+    //     {
+    //       raw: true, //有的是日期、小数等格式，直接乱码#。所以这里直接保留原始字符串
+    //     }
+    //   );
+    //   const wbout = XLSX.write(workbook, {
+    //     bookType: "xlsx",
+    //     bookSST: true,
+    //     type: "array"
+    //   });
+    //   let fileName = 'export-table'
+    //   saveAs(
+    //     new Blob([wbout], {
+    //       type: "application/octet-stream"
+    //     }),
+    //     `${fileName}.xlsx`
+    //   );
+    // }
+    export4json() {
+      let rows = [
+        { name: "George Washington", birthday: "1732-02-22" },
+        { name: "John Adams", birthday: "1735-10-19" },
+      ]
+      console.log(rows)
+      // const worksheet = XLSX.utils.json_to_sheet(rows)
+      const worksheet = XLSX.utils.json_to_sheet(this.tableData)
+      const workbook = XLSX.utils.book_new()
+      XLSX.utils.book_append_sheet(workbook, worksheet, "Dates")
+
+      /* fix headers */
+      XLSX.utils.sheet_add_aoa(worksheet, [["Name", "Birthday"]], { origin: "A1" });
+
+      /* calculate column width */
+      const max_width = rows.reduce((w, r) => Math.max(w, r.name.length), 10);
+      worksheet["!cols"] = [{ wch: max_width }];
+
+      const wbout = XLSX.write(workbook, {
+        bookType: "xlsx",
+        bookSST: true,
+        type: "array"
+      })
+      let fileName = 'export-table-test-1209'
+      saveAs(
+        new Blob([wbout], {
+          type: "application/octet-stream"
+        }),
+        `${fileName}.xlsx`
+      )
+    },
+    export4DOM() {
+      document.getElementById('table-exprot').querySelector('table').setAttribute('id', 'tableHeader')
+      document.getElementById('table-exprot').querySelector('.el-table__body-wrapper').querySelector('table').setAttribute('id', 'tableBody')
+      
+      const headers = ["Table 1", "Table2", "Table 3"];
+
+      /* first table */
+      // const ws = XLSX.utils.aoa_to_sheet([[headers[0]]]);
+      const ws = XLSX.utils.aoa_to_sheet([['']]);
+      XLSX.utils.sheet_add_dom(ws, document.getElementById('tableHeader'), { origin: -1 });
+      // create_gap_rows(ws, 1); // one row gap after first table
+
+      /* second table */
+      XLSX.utils.sheet_add_aoa(ws, [['']], { origin: -1 });
+      XLSX.utils.sheet_add_dom(ws, document.getElementById('tableBody'), { origin: -1 });
+      // create_gap_rows(ws, 2); // two rows gap after second table
+
+      // /* third table */
+      // XLSX.utils.sheet_add_aoa(ws, [[headers[2]]], { origin: -1 });
+      // XLSX.utils.sheet_add_dom(ws, document.getElementById('table3'), { origin: -1 });
+
+      /* create workbook and export */
+      const wb = XLSX.utils.book_new();
+      XLSX.utils.book_append_sheet(wb, ws, "Export");
+      XLSX.writeFile(wb, "SheetJSMultiTablexport.xlsx");
+
     }
   }
 }
