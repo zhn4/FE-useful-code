@@ -1,29 +1,16 @@
-# corporate_governance
+# FE-useful-code
+> 前端常用代码
 
-## Project setup
+## 启动 Project setup
 ```
-npm install
-```
-
-### Compiles and hot-reloads for development
-```
-npm run serve
+yarn serve
 ```
 
-### Compiles and minifies for production
-```
-npm run build
-```
+## 首页 Index page
+[默认地址](http://localhost:8080/) ，包含各种 Demo  
 
-### Run your unit tests
-```
-npm run test:unit
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+- 普通列表页
+- 标签+列表页组合
+- dialog 二次封装
+- 表格+表单，并输入校验
+- slot 插槽的调用方法
