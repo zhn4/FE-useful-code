@@ -72,6 +72,14 @@ const routes = [
     name: 'flexTable',
     component: () => import('../views/FlexTable.vue'),
   },
+  {
+    path: '/regList',
+    name: 'regList',
+    meta: {
+      name: '正则',
+    },
+    component: () => import('../views/aboutRegEx/index.vue'),
+  },
 ]
 
 export default routes
