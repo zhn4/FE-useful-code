@@ -80,6 +80,14 @@ const routes = [
     },
     component: () => import('../views/aboutRegEx/index.vue'),
   },
+  {
+    path: '/aboutUX',
+    name: 'aboutUX',
+    meta: {
+      name: '交互建议',
+    },
+    component: () => import('../views/aboutUX/index.vue'),
+  },
 ]
 
 export default routes
