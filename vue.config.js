@@ -8,4 +8,22 @@ module.exports = defineConfig({
   publicPath: '/FE-useful-code/',
   outputDir: 'docs', // 特意打包到这个目录，github page 除了根目录就只有这个目录
   assetsDir: './',
+  chainWebpack: config => {
+    // NOTE: 读取纯 md 的方法
+    // config.module
+    //   .rule('md')
+    //   .test(/\.md$/)
+    //   .use('html-loader')
+    //   .loader('html-loader')
+    //     .end()
+    //   .use('markdown-loader')
+    //     .loader('markdown-loader')
+    //     .end()
+    config.module
+      .rule('md')
+      .test(/\.md$/)
+      .use('raw-loader')
+      .loader('raw-loader')
+      .end();
+  }
 });

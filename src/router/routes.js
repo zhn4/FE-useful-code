@@ -88,6 +88,14 @@ const routes = [
     },
     component: () => import('../views/aboutUX/index.vue'),
   },
+  {
+    path: '/codeStyle',
+    name: 'codeStyle',
+    meta: {
+      name: '编码建议',
+    },
+    component: () => import('../views/codeStyle/index.vue'),
+  },
 ]
 
 export default routes
