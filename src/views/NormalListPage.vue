@@ -1,4 +1,3 @@
-
 <template>
   <div class="custom-page">
     <div class="custom-search-bar">
@@ -26,11 +25,12 @@
     </div>
     <div class="custom-content">
       <div class="custom-btns">
-        <el-button type="primary" @click="onDeleteBatch">批量删除（需要的话）</el-button>
+        <el-button type="primary" @click="onClickFunction">独立功能</el-button>
+        <el-button type="primary" plain @click="onDeleteBatch">批量删除</el-button>
       </div>
       <el-table :data="tableData" border style="width: 100%" height="100%">
         <el-table-column type="selection" width="55" align="center"> </el-table-column>
-        <el-table-column prop="date" label="序号" width="180" align="center"> </el-table-column>
+        <el-table-column type="index" label="序号" width="55" align="center"> </el-table-column>
         <el-table-column prop="date" label="名称" width="180" align="center"> </el-table-column>
         <el-table-column prop="date" label="年度" width="180" align="center"> </el-table-column>
         <el-table-column prop="date" label="创建人" width="180" align="center"> </el-table-column>
@@ -81,7 +81,7 @@ export default {
       i++
       this.tableData.push({
         date: `fake-data-${i}`,
-        desc: `${new Date().getTime().toString()}`,
+        desc: `时间戳：${new Date().getTime().toString()}`,
       })
     }
   },
@@ -93,6 +93,7 @@ export default {
     handleSizeChange(val) {},
     handleCurrentChange(val) {},
     onDeleteBatch() {},
+    onClickFunction() {},
   },
 }
 </script>
