@@ -96,6 +96,14 @@ const routes = [
     },
     component: () => import('../views/codeStyle/index.vue'),
   },
+  {
+    path: '/markDownEditor',
+    name: 'markDownEditor',
+    meta: {
+      name: 'markdown编辑器',
+    },
+    component: () => import('../views/markdownEditor/index.vue'),
+  },
 ]
 
 export default routes
