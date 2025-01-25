@@ -29,31 +29,14 @@
       <div class="custom-btns">
         <el-button type="primary" @click="onOpenDialog">弹窗</el-button>
         <el-button type="primary" @click="onOpenDrawer">抽屉</el-button>
+        <el-button type="primary" @click="onMessage">消息提示</el-button>
+        <el-button type="primary" @click="onNotification">通知</el-button>
       </div>
-      <div>
-        <h2>搜索栏相关</h2>
-        <ul>
-          <li>建议不要启用 el-form-item 的 label 属性，使用 placeholder 代替，节省更多空间</li>
-          <li>考虑到不同设备尺寸，且每个搜索字段的长度不一问题</li>
-          <li>
-            统一使用【搜索按钮】触发数据请求，如果涉及多个搜索字段且每个字段改变都绑定触发数据请求，徒增服务器压力，减少服务器压力
-          </li>
-          <li>每个字段可清空</li>
-        </ul>
-        <h2>弹窗</h2>
-        <ul>
-          <li>表单填写字段保持在5个及以内</li>
-          <li>考虑到不同设备的尺寸，且这个弹窗组件的四周有极大旷量</li>
-          <li>应该是轻便、清爽的感觉</li>
-          <li>点击遮罩层可关闭</li>
-        </ul>
-        <h2>抽屉</h2>
-        <ul>
-          <li>表单填写字段大于5个及更多复杂填写内容</li>
-          <li>可以用尽页面高度，不要担心设备尺寸</li>
-          <li>点击遮罩层可关闭</li>
-        </ul>
-      </div>
+      <div
+        v-html="mdData"
+        class="markdown-body theme-atom-one-dark"
+        style="height: 100%; overflow: auto"
+      ></div>
     </div>
     <dialogByUX :visible.sync="visibleByDialog" />
     <drawerByUX :visible.sync="visibleByDrawer" />
@@ -63,6 +46,14 @@
 <script>
 import dialogByUX from './components/dialogByUX.vue'
 import drawerByUX from './components/drawerByUX.vue'
+
+import markdownFile from './aboutUX.md'
+
+import { marked } from 'marked'
+import hljs from 'highlight.js'
+
+import 'highlight.js/styles/atom-one-dark.css'
+import 'github-markdown-css'
 
 export default {
   name: 'aboutUX',
@@ -79,7 +70,16 @@ export default {
       },
       visibleByDialog: false,
       visibleByDrawer: false,
+      mdData: null,
     }
+  },
+  mounted() {
+    this.mdData = marked.parse(markdownFile, {
+      highlight: function (code, lang) {
+        const language = hljs.getLanguage(lang) ? lang : 'plaintext'
+        return hljs.highlight(code, { language }).value
+      },
+    })
   },
   methods: {
     onReset() {
@@ -90,6 +90,16 @@ export default {
     },
     onOpenDrawer() {
       this.visibleByDrawer = true
+    },
+    onMessage() {
+      this.$message.success('消息提示，当前页面功能相关提示')
+    },
+    onNotification() {
+      this.$notify({
+        title: '提示',
+        type: 'warning',
+        message: '全局提示，用于全局的请求拦截器',
+      })
     },
   },
 }
