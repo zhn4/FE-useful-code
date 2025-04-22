@@ -96,13 +96,29 @@ const routes = [
     },
     component: () => import('../views/codeStyle/index.vue'),
   },
+  // {
+  //   path: '/markDownEditor',
+  //   name: 'markDownEditor',
+  //   meta: {
+  //     name: 'markdown编辑器',
+  //   },
+  //   component: () => import('../views/markdownEditor/index.vue'),
+  // },
   {
-    path: '/markDownEditor',
-    name: 'markDownEditor',
+    path: '/leftRight',
+    name: 'leftRight',
     meta: {
-      name: 'markdown编辑器',
+      name: '左右布局',
     },
-    component: () => import('../views/markdownEditor/index.vue'),
+    component: () => import('../views/leftRight/index.vue'),
+  },
+  {
+    path: '/allCharts',
+    name: 'allCharts',
+    meta: {
+      name: '各种图表布局',
+    },
+    component: () => import('../views/allCharts/index.vue'),
   },
 ]
 

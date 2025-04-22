@@ -8,7 +8,7 @@ import '@/assets/style/style.less'
 
 Vue.config.productionTip = false;
 
-Vue.use(ElementUI)
+Vue.use(ElementUI,  { size: 'small', zIndex: 3000 })
 
 new Vue({
   router,
