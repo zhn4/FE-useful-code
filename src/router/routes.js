@@ -120,6 +120,14 @@ const routes = [
     },
     component: () => import('../views/allCharts/index.vue'),
   },
+  {
+    path: '/createForm',
+    name: 'createForm',
+    meta: {
+      name: '创建调查问卷',
+    },
+    component: () => import('../views/createForm/index.vue'),
+  },
 ]
 
 export default routes
