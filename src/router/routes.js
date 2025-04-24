@@ -128,6 +128,14 @@ const routes = [
     },
     component: () => import('../views/createForm/index.vue'),
   },
+  // {
+  //   path: '/genFormCode',
+  //   name: 'genFormCode',
+  //   meta: {
+  //     name: '生成表单代码',
+  //   },
+  //   component: () => import('../views/genFormCode/index.vue'),
+  // },
 ]
 
 export default routes
