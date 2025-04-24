@@ -5,7 +5,7 @@
       <router-link to="/about">About</router-link>
     </nav> -->
     <div class="back-btn">
-      <el-button type="primary" @click="onBack">路由返回</el-button>
+      <el-button type="primary" @click="onBack">返回</el-button>
     </div>
     <router-view />
   </div>
@@ -15,7 +15,9 @@
 export default {
   methods: {
     onBack() {
-      this.$router.back()
+      this.$router.push({
+        path: '/'
+      })
     },
   },
 }
