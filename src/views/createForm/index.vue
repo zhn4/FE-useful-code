@@ -47,7 +47,14 @@
           </el-table-column>
           <el-table-column label="操作" align="center" width="80">
             <template slot-scope="scope">
-              <el-button type="text" style="color: red;" @click="onDeleteByItem(scope.$index)">删除</el-button>
+              <div class="btns">
+                <el-button type="text" @click="onMoveTopByItem(scope.$index)" icon="el-icon-top"
+                  :disabled="scope.$index === 0">上移</el-button>
+                <el-button type="text" style="color: red;" @click="onDeleteByItem(scope.$index)"
+                  icon="el-icon-delete">删除</el-button>
+                <el-button type="text" @click="onMoveBottomByItem(scope.$index)" icon="el-icon-bottom"
+                  :disabled="scope.$index === form.tableData.length - 1">下移</el-button>
+              </div>
             </template>
           </el-table-column>
         </el-table>
@@ -225,7 +232,21 @@ export default {
     },
     onCloseDrawer() {
       this.drawerVisible = false
-    }
+    },
+    onMoveTopByItem(index) {
+      if (index > 0) {
+        const item = this.form.tableData[index]
+        this.form.tableData.splice(index, 1)
+        this.form.tableData.splice(index - 1, 0, item)
+      }
+    },
+    onMoveBottomByItem(index) {
+      if (index < this.form.tableData.length - 1) {
+        const item = this.form.tableData[index]
+        this.form.tableData.splice(index, 1)
+        this.form.tableData.splice(index + 1, 0, item)
+      }
+    },
   }
 }
 </script>
@@ -241,6 +262,12 @@ export default {
   .main {
     flex: 1;
     overflow: auto;
+  }
+
+  .btns {
+    .el-button+.el-button {
+      margin: 0;
+    }
   }
 }
 </style>

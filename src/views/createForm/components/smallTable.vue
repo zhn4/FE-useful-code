@@ -15,9 +15,12 @@
           </el-form-item>
         </template>
       </el-table-column>
-      <el-table-column label="操作" align="center" width="60">
+      <el-table-column label="操作" align="center" width="120">
         <template slot-scope="scope">
           <el-button type="text" style="color: red;" @click="onDeleteByOptions(scope.$index)">删除</el-button>
+          <el-button type="text" @click="onMoveTopByItem(scope.$index)" :disabled="scope.$index === 0">上移</el-button>
+          <el-button type="text" @click="onMoveBottomByItem(scope.$index)"
+            :disabled="scope.$index === form.tableData.length - 1">下移</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -66,7 +69,20 @@ export default {
       this.tableData.splice(index, 1)
       this.$refs['smallTableRef'].clearValidate()
     },
-
+    onMoveTopByItem(index) {
+      if (index > 0) {
+        const item = this.form.tableData[index]
+        this.form.tableData.splice(index, 1)
+        this.form.tableData.splice(index - 1, 0, item)
+      }
+    },
+    onMoveBottomByItem(index) {
+      if (index < this.form.tableData.length - 1) {
+        const item = this.form.tableData[index]
+        this.form.tableData.splice(index, 1)
+        this.form.tableData.splice(index + 1, 0, item)
+      }
+    },
   }
 }
 </script>
