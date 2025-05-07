@@ -136,6 +136,30 @@ const routes = [
   //   },
   //   component: () => import('../views/genFormCode/index.vue'),
   // },
+  {
+    path: '/importExcel',
+    name: 'importExcel',
+    meta: {
+      name: '导入 excel',
+    },
+    component: () => import('../views/importExcel/index.vue'),
+  },
+  // {
+  //   path: '/importExcelByMerge',
+  //   name: 'importExcelByMerge',
+  //   meta: {
+  //     name: '导入 importExcelByMerge',
+  //   },
+  //   component: () => import('../views/importExcel/indexByMerge.vue'),
+  // },
+  // {
+  //   path: '/importExcelByAllSheet',
+  //   name: 'importExcelByAllSheet',
+  //   meta: {
+  //     name: '导入 importExcelByAllSheet',
+  //   },
+  //   component: () => import('../views/importExcel/indexByAllSheet.vue'),
+  // },
 ]
 
 export default routes
