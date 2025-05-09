@@ -160,6 +160,14 @@ const routes = [
   //   },
   //   component: () => import('../views/importExcel/indexByAllSheet.vue'),
   // },
+  {
+    path: '/importExcelAndAnalyze',
+    name: 'importExcelAndAnalyze',
+    meta: {
+      name: '导入 excel 并分析',
+    },
+    component: () => import('../views/importExcelAndAnalyze/index.vue'),
+  },
 ]
 
 export default routes
