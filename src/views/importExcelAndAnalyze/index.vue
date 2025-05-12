@@ -326,13 +326,23 @@ export default {
       }
 
       // 根据输入的最小值和最大值过滤数据
-      this.filteredTableData = this.tableData.filter((row, rowIndex) => {
+      const result = this.tableData.filter((row, rowIndex) => {
         const balance = parseFloat(this.excelData[rowIndex + 1][typeIndex]) || 0
         return (
           (this.filter.minNum === null || balance >= this.filter.minNum) &&
           (this.filter.maxNum === null || balance <= this.filter.maxNum)
         )
       })
+
+      if (result.length === 0) {
+        this.$message({
+          message: '没有符合条件的数据',
+          type: 'warning',
+        })
+        return
+      } else {
+        this.filteredTableData = result
+      }
     },
     handleReset() {
       this.filter.minNum = null
