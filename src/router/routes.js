@@ -19,11 +19,11 @@ const routes = [
   },
   {
     path: '/normalListPage',
-    name: 'NormalListPage',
+    name: 'normalListPage',
     meta: {
       name: '普通列表页',
     },
-    component: () => import('../views/NormalListPage.vue'),
+    component: () => import('../views/normalListPage/index.vue'),
   },
   {
     path: '/tabFlexTable',
@@ -163,6 +163,30 @@ const routes = [
   {
     path: '/importExcelAndAnalyze',
     name: 'importExcelAndAnalyze',
+    meta: {
+      name: '导入 excel 并分析',
+    },
+    component: () => import('../views/importExcelAndAnalyze/index.vue'),
+  },
+  {
+    path: '/importExcelAndAnalyze1',
+    name: 'importExcelAndAnalyze1',
+    meta: {
+      name: '导入 excel 并分析',
+    },
+    component: () => import('../views/importExcelAndAnalyze/index.vue'),
+  },
+  {
+    path: '/importExcelAndAnalyze2',
+    name: 'importExcelAndAnalyze2',
+    meta: {
+      name: '导入 excel 并分析',
+    },
+    component: () => import('../views/importExcelAndAnalyze/index.vue'),
+  },
+  {
+    path: '/importExcelAndAnalyze3',
+    name: 'importExcelAndAnalyze3',
     meta: {
       name: '导入 excel 并分析',
     },
