@@ -1,5 +1,5 @@
 <template>
-  <el-table :data="tableData" style="width: 800px" border>
+  <el-table :data="tableData" style="width: 800px" height="100%" border>
     <el-table-column label="名字">
       <template slot-scope="scope">
         <span>{{ scope.row.meta ? scope.row.meta.name : '' }}</span>
