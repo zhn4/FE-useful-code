@@ -144,22 +144,6 @@ const routes = [
     },
     component: () => import('../views/importExcel/index.vue'),
   },
-  // {
-  //   path: '/importExcelByMerge',
-  //   name: 'importExcelByMerge',
-  //   meta: {
-  //     name: '导入 importExcelByMerge',
-  //   },
-  //   component: () => import('../views/importExcel/indexByMerge.vue'),
-  // },
-  // {
-  //   path: '/importExcelByAllSheet',
-  //   name: 'importExcelByAllSheet',
-  //   meta: {
-  //     name: '导入 importExcelByAllSheet',
-  //   },
-  //   component: () => import('../views/importExcel/indexByAllSheet.vue'),
-  // },
   {
     path: '/importExcelAndAnalyze',
     name: 'importExcelAndAnalyze',
@@ -169,28 +153,17 @@ const routes = [
     component: () => import('../views/importExcelAndAnalyze/index.vue'),
   },
   {
-    path: '/importExcelAndAnalyze1',
-    name: 'importExcelAndAnalyze1',
-    meta: {
-      name: '导入 excel 并分析',
-    },
-    component: () => import('../views/importExcelAndAnalyze/index.vue'),
+    path: '/dropForm',
+    name: 'dropForm',
+    component: () => import('../views/dropForm/index.vue'),
   },
   {
-    path: '/importExcelAndAnalyze2',
-    name: 'importExcelAndAnalyze2',
+    path: '/captchaCode',
+    name: 'captchaCode',
     meta: {
-      name: '导入 excel 并分析',
+      name: '验证码',
     },
-    component: () => import('../views/importExcelAndAnalyze/index.vue'),
-  },
-  {
-    path: '/importExcelAndAnalyze3',
-    name: 'importExcelAndAnalyze3',
-    meta: {
-      name: '导入 excel 并分析',
-    },
-    component: () => import('../views/importExcelAndAnalyze/index.vue'),
+    component: () => import('../views/captchaCode/index.vue'),
   },
 ]
 
