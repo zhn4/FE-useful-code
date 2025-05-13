@@ -32,16 +32,35 @@ export default {
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
       // 绘制验证码文字
-      ctx.font = "30px Arial";
-      ctx.fillStyle = this.getRandomColor(0, 150);
-      ctx.textBaseline = "middle";
       const text = this.inputText || "验证码";
-      const textWidth = ctx.measureText(text).width;
-      ctx.fillText(
-        text,
-        (canvas.width - textWidth) / 2,
-        canvas.height / 2
-      );
+      const charArray = text.split(""); // 将文字拆分为单个字符
+      const charCount = charArray.length;
+
+      charArray.forEach((char, index) => {
+        const fontSize = this.getRandomInt(24, 36); // 随机字体大小
+        const angle = this.getRandomInt(-40, 40); // 随机旋转角度
+
+        ctx.font = `${fontSize}px Arial`;
+        ctx.fillStyle = this.getRandomColor(0, 150);
+        ctx.textBaseline = "middle";
+
+        // 保存当前状态
+        ctx.save();
+
+        // 计算每个字符的位置
+        const x = (canvas.width / charCount) * index + 10;
+        const y = canvas.height / 2;
+
+        // 设置旋转
+        ctx.translate(x, y);
+        ctx.rotate((angle * Math.PI) / 180);
+
+        // 绘制字符
+        ctx.fillText(char, 0, 0);
+
+        // 恢复状态
+        ctx.restore();
+      });
 
       // 添加干扰线
       for (let i = 0; i < 5; i++) {
@@ -77,6 +96,9 @@ export default {
       const g = Math.floor(Math.random() * (max - min) + min);
       const b = Math.floor(Math.random() * (max - min) + min);
       return `rgb(${r}, ${g}, ${b})`;
+    },
+    getRandomInt(min, max) {
+      return Math.floor(Math.random() * (max - min + 1)) + min;
     },
   },
 };
