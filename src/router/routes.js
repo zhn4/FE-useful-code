@@ -44,7 +44,7 @@ const routes = [
     meta: {
       name: 'dialog 二次封装',
     },
-    component: () => import('../views/ListAndDialog.vue'),
+    component: () => import('../views/listAndDialog/index.vue'),
   },
   {
     path: '/formAndTable',
