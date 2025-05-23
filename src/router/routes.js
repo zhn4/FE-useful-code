@@ -165,6 +165,38 @@ const routes = [
     },
     component: () => import('../views/captchaCode/index.vue'),
   },
+  // {
+  //   path: '/processMap',
+  //   name: 'processMap',
+  //   meta: {
+  //     name: '流程图',
+  //   },
+  //   component: () => import('../views/processMap/index.vue'),
+  // },
+  {
+    path: '/svgGen',
+    name: 'svgGen',
+    meta: {
+      name: 'svg生成',
+    },
+    component: () => import('../views/svgGen/index.vue'),
+  },
+  // {
+  //   path: '/eleComGen',
+  //   name: 'eleComGen',
+  //   meta: {
+  //     name: 'element 组件生成',
+  //   },
+  //   component: () => import('../views/eleComGen/index.vue'),
+  // },
+  {
+    path: '/noteBook',
+    name: 'noteBook',
+    meta: {
+      name: '笔记本',
+    },
+    component: () => import('../views/noteBook/index.vue'),
+  },
 ]
 
 export default routes
