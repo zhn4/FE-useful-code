@@ -111,7 +111,7 @@
       <el-form-item label="备注">
         <el-input v-model="form.remark" type="textarea" rows="6" />
       </el-form-item>
-      <el-form-item>
+      <el-form-item class="modify-item">
         <el-button type="primary" @click="submitForm" size="large">提交</el-button>
         <el-button @click="resetForm" size="large">重置</el-button>
       </el-form-item>
@@ -205,6 +205,7 @@ export default {
       this.$refs.medicalForm.validate(valid => {
         if (valid) {
           this.$message.success("提交成功！");
+          localStorage.removeItem('medicalFormCache');
         }
       });
     },
@@ -233,5 +234,13 @@ export default {
   height: 100%;
   margin: 0 auto;
   overflow: auto;
+}
+
+.modify-item {
+  position: sticky;
+  bottom: 0;
+  left: 0;
+  z-index: 11;
+  background-color: #fff;
 }
 </style>
