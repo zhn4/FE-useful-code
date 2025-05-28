@@ -68,8 +68,8 @@ const routes = [
     component: () => import('../views/testSlot/index.vue'),
   },
   {
-    path: '/regList',
-    name: 'regList',
+    path: '/aboutRegEx',
+    name: 'aboutRegEx',
     meta: {
       name: '正则',
     },
