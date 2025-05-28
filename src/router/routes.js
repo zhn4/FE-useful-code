@@ -197,6 +197,31 @@ const routes = [
     },
     component: () => import('../views/noteBook/index.vue'),
   },
+  // {
+  //   path: '/showCode',
+  //   name: 'showCode',
+  //   meta: {
+  //     name: '源码',
+  //   },
+  //   component: () => import('../views/showCode/index.vue'),
+  // },
+  // TODO: 测试功能
+  // {
+  //   path: '/menuAndRouter',
+  //   name: 'menuAndRouter',
+  //   meta: {
+  //     name: '菜单和路由',
+  //   },
+  //   component: () => import('../views/menuAndRouter/index.vue'),
+  // },
+  {
+    path: '/longForm',
+    name: 'longForm',
+    meta: {
+      name: '长表单',
+    },
+    component: () => import('../views/longForm/index.vue'),
+  }
 ]
 
 export default routes
