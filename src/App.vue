@@ -4,7 +4,8 @@
       <router-link to="/">Home</router-link> |
       <router-link to="/about">About</router-link>
     </nav> -->
-    <div class="back-btn">
+    <div v-if="$route.path !== '/'" class="back-btn">
+      <el-button type="primary" @click="onCode">查看源码</el-button>
       <el-button type="primary" @click="onBack">返回</el-button>
     </div>
     <router-view />
@@ -19,6 +20,10 @@ export default {
         path: '/'
       })
     },
+    onCode() {
+      const path = `https://github.com/zhn4/FE-useful-code/tree/master/src/views`
+      window.open(`${path}/${this.$route.name}`, '_blank')
+    }
   },
 }
 </script>

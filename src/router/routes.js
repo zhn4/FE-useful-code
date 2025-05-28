@@ -31,13 +31,13 @@ const routes = [
     meta: {
       name: '标签+列表页组合',
     },
-    component: () => import('../views/TabFlexTable.vue'),
+    component: () => import('../views/tabFlexTable/index.vue'),
   },
-  {
-    path: '/handle',
-    name: 'Handle',
-    component: () => import('../views/Handle.vue'),
-  },
+  // {
+  //   path: '/handle',
+  //   name: 'Handle',
+  //   component: () => import('../views/Handle.vue'),
+  // },
   {
     path: '/listAndDialog',
     name: 'listAndDialog',
@@ -52,25 +52,20 @@ const routes = [
     meta: {
       name: '表格+表单，并输入校验',
     },
-    component: () => import('../views/FormAndTable.vue'),
+    component: () => import('../views/formAndTable/index.vue'),
   },
-  {
-    path: '/formAndTableRender',
-    name: 'formAndTableRender',
-    component: () => import('../views/FormAndTableRender.vue'),
-  },
+  // {
+  //   path: '/formAndTableRender',
+  //   name: 'formAndTableRender',
+  //   component: () => import('../views/FormAndTableRender.vue'),
+  // },
   {
     path: '/testSlot',
     name: 'testSlot',
     meta: {
       name: 'slot 插槽的调用方法',
     },
-    component: () => import('../views/TestSlot.vue'),
-  },
-  {
-    path: '/flexTable',
-    name: 'flexTable',
-    component: () => import('../views/FlexTable.vue'),
+    component: () => import('../views/testSlot/index.vue'),
   },
   {
     path: '/regList',
@@ -221,7 +216,7 @@ const routes = [
       name: '长表单',
     },
     component: () => import('../views/longForm/index.vue'),
-  }
+  },
 ]
 
 export default routes
