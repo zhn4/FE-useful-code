@@ -217,6 +217,14 @@ const routes = [
     },
     component: () => import('../views/longForm/index.vue'),
   },
+  {
+    path: '/tvStream',
+    name: 'tvStream',
+    meta: {
+      name: '电视',
+    },
+    component: () => import('../views/tvStream/index.vue'),
+  },
 ]
 
 export default routes
