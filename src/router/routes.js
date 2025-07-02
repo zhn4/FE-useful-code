@@ -54,11 +54,6 @@ const routes = [
     },
     component: () => import('../views/formAndTable/index.vue'),
   },
-  // {
-  //   path: '/formAndTableRender',
-  //   name: 'formAndTableRender',
-  //   component: () => import('../views/FormAndTableRender.vue'),
-  // },
   {
     path: '/testSlot',
     name: 'testSlot',
@@ -148,10 +143,18 @@ const routes = [
     component: () => import('../views/importExcelAndAnalyze/index.vue'),
   },
   {
-    path: '/dropForm',
-    name: 'dropForm',
-    component: () => import('../views/dropForm/index.vue'),
+    path: '/importExcelByMulti',
+    name: 'importExcelByMulti',
+    meta: {
+      name: '导入多个Excel',
+    },
+    component: () => import('../views/importExcelByMulti/index.vue'),
   },
+  // {
+  //   path: '/dropForm',
+  //   name: 'dropForm',
+  //   component: () => import('../views/dropForm/index.vue'),
+  // },
   {
     path: '/captchaCode',
     name: 'captchaCode',
@@ -160,14 +163,6 @@ const routes = [
     },
     component: () => import('../views/captchaCode/index.vue'),
   },
-  // {
-  //   path: '/processMap',
-  //   name: 'processMap',
-  //   meta: {
-  //     name: '流程图',
-  //   },
-  //   component: () => import('../views/processMap/index.vue'),
-  // },
   {
     path: '/svgGen',
     name: 'svgGen',
@@ -192,14 +187,6 @@ const routes = [
     },
     component: () => import('../views/noteBook/index.vue'),
   },
-  // {
-  //   path: '/showCode',
-  //   name: 'showCode',
-  //   meta: {
-  //     name: '源码',
-  //   },
-  //   component: () => import('../views/showCode/index.vue'),
-  // },
   // TODO: 测试功能
   // {
   //   path: '/menuAndRouter',
@@ -208,6 +195,14 @@ const routes = [
   //     name: '菜单和路由',
   //   },
   //   component: () => import('../views/menuAndRouter/index.vue'),
+  // },
+  // {
+  //   path: '/menuManage',
+  //   name: 'menuManage',
+  //   meta: {
+  //     name: '菜单管理',
+  //   },
+  //   component: () => import('../views/menuAndRouter/menuManage.vue'),
   // },
   {
     path: '/longForm',
@@ -225,6 +220,30 @@ const routes = [
     },
     component: () => import('../views/tvStream/index.vue'),
   },
+  // {
+  //   path: '/consoleCollect',
+  //   name: 'consoleCollect',
+  //   meta: {
+  //     name: 'console 收集',
+  //   },
+  //   component: () => import('../views/consoleCollect/index.vue'),
+  // },
+  // {
+  //   path: '/trafficViolationReport',
+  //   name: 'trafficViolationReport',
+  //   meta: {
+  //     name: '交通违规举报',
+  //   },
+  //   component: () => import('../views/trafficViolationReport/index.vue'),
+  // },
+  // {
+  //   path: '/testPage',
+  //   name: 'testPage',
+  //   meta: {
+  //     name: '功能测试页',
+  //   },
+  //   component: () => import('../views/testPage/index.vue'),
+  // },
 ]
 
 export default routes
