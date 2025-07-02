@@ -69,92 +69,48 @@ export default {
   },
   methods: {
     async fetchM3uList() {
-      this.loading = true
+      this.loading = true;
       try {
         const res = await fetch("https://gh.tryxd.cn/raw.githubusercontent.com/suxuang/myIPTV/main/ipv4.m3u");
         const text = await res.text();
         this.streamList = this.parseM3u(text);
-        this.loading = false;
-        // 缓存到 localStorage
         localStorage.setItem(STREAM_CACHE_KEY, JSON.stringify(this.streamList));
       } catch (e) {
-        this.loading = false;
         this.$message.error("直播源列表获取失败");
+      } finally {
+        this.loading = false;
       }
     },
     parseM3u(m3uText) {
       const lines = m3uText.split('\n');
       const list = [];
       let name = '';
-      for (let i = 0; i < lines.length; i++) {
-        const line = lines[i].trim();
+      lines.forEach(line => {
+        line = line.trim();
         if (line.startsWith('#EXTINF')) {
           const match = line.match(/,(.*)$/);
           name = match ? match[1].trim() : '未知频道';
         } else if (line && !line.startsWith('#')) {
           list.push({ name, url: line });
         }
-      }
+      });
       return list;
     },
-    initPlayer(url) {
-      console.log("初始化播放器，当前URL:", url);
-      if (this.dp) {
-        this.dp.destroy();
-        this.dp = null;
-      }
-      // 判断格式
-      let type = 'auto';
-      let customType = {};
+    getPlayerTypeAndCustomType(url) {
       if (url.endsWith('.m3u8')) {
-        console.log("检测到 HLS 流，使用 customHls");
-        type = 'customHls';
-        customType = this.handleHLV(url)
+        return {
+          type: 'customHls',
+          customType: this.createHlsCustomType(url)
+        };
       } else if (url.endsWith('.flv') || url.endsWith('.hlv')) {
-        console.log("检测到 FLV 流，使用 customFlv");
-        type = 'customFlv';
-        customType = this.handleFLV(url);
+        return {
+          type: 'customFlv',
+          customType: this.createFlvCustomType(url)
+        };
       }
-      this.$nextTick(() => {
-        this.dp = new DPlayer({
-          container: document.getElementById('dplayer'),
-          autoplay: true,
-          video: {
-            url: url,
-            type: type,
-            customType: customType
-          }
-        });
-        // 自动切换 customType
-        // if (type === 'customHls') {
-        //   this.dp.switchVideo({
-        //     url: url,
-        //     type: 'customHls'
-        //   });
-        // } else if (type === 'customFlv') {
-        //   this.dp.switchVideo({
-        //     url: url,
-        //     type: 'customFlv'
-        //   });
-        // }
-      });
+      return { type: 'auto', customType: {} };
     },
-    handleFLV(url) {
-      return {
-        customFlv: function (video) {
-          if (flvjs.isSupported()) {
-            const flvPlayer = flvjs.createPlayer({
-              type: 'flv',
-              url: url
-            });
-            flvPlayer.attachMediaElement(video);
-            flvPlayer.load();
-            flvPlayer.play();
-          }
-        }
-      }
-    },
-    handleHLV(url) {
+    createHlsCustomType(url) {
       return {
         customHls: function (video) {
           if (Hls.isSupported()) {
@@ -163,7 +119,37 @@ export default {
             hls.attachMedia(video);
           }
         }
+      };
+    },
+    createFlvCustomType(url) {
+      return {
+        customFlv: function (video) {
+          if (flvjs.isSupported()) {
+            const flvPlayer = flvjs.createPlayer({ type: 'flv', url });
+            flvPlayer.attachMediaElement(video);
+            flvPlayer.load();
+            flvPlayer.play();
+          }
+        }
+      };
+    },
+    initPlayer(url) {
+      if (this.dp) {
+        this.dp.destroy();
+        this.dp = null;
       }
+      const { type, customType } = this.getPlayerTypeAndCustomType(url);
+      this.$nextTick(() => {
+        this.dp = new DPlayer({
+          container: document.getElementById('dplayer'),
+          autoplay: true,
+          video: {
+            url,
+            type,
+            customType
+          }
+        });
+      });
     }
   }
 };
