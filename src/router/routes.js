@@ -142,14 +142,14 @@ const routes = [
     },
     component: () => import('../views/importExcelAndAnalyze/index.vue'),
   },
-  {
-    path: '/importExcelByMulti',
-    name: 'importExcelByMulti',
-    meta: {
-      name: '导入多个Excel',
-    },
-    component: () => import('../views/importExcelByMulti/index.vue'),
-  },
+  // {
+  //   path: '/importExcelByMulti',
+  //   name: 'importExcelByMulti',
+  //   meta: {
+  //     name: '导入多个银行流水Excel',
+  //   },
+  //   component: () => import('../views/importExcelByMulti/index.vue'),
+  // },
   // {
   //   path: '/dropForm',
   //   name: 'dropForm',
@@ -220,14 +220,14 @@ const routes = [
     },
     component: () => import('../views/tvStream/index.vue'),
   },
-  // {
-  //   path: '/consoleCollect',
-  //   name: 'consoleCollect',
-  //   meta: {
-  //     name: 'console 收集',
-  //   },
-  //   component: () => import('../views/consoleCollect/index.vue'),
-  // },
+  {
+    path: '/consoleCollect',
+    name: 'consoleCollect',
+    meta: {
+      name: 'console 收集',
+    },
+    component: () => import('../views/consoleCollect/index.vue'),
+  },
   // {
   //   path: '/trafficViolationReport',
   //   name: 'trafficViolationReport',
