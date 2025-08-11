@@ -5,8 +5,8 @@
       <div class="logo-area">
         <img class="logo" src="https://www.chinasouthernpowergrid.com/logo.png" alt="logo" />
         <div class="title">
-          <div class="main-title">中国南方电网</div>
-          <div class="sub-title">数字纪检监察一体化应用</div>
+          <div class="main-title">大标题</div>
+          <div class="sub-title">小标题</div>
         </div>
       </div>
       <div class="nav-icons">
@@ -16,7 +16,7 @@
           <i v-else :class="item.icon"></i>
           <div class="nav-label">{{ item.label }}</div>
         </div>
-        <el-button type="primary" size="small" class="big-data-btn">大员特</el-button>
+        <el-button type="primary" size="small" class="big-data-btn">大按钮</el-button>
       </div>
       <div class="header-right">
         <el-badge :value="5" class="search-badge">
@@ -25,14 +25,19 @@
         <span class="header-link">消息</span>
         <span class="header-link">管理</span>
         <el-avatar size="small" icon="el-icon-user-solid" />
-        <span class="header-user">倪海管专</span>
+        <span class="header-user">123123</span>
       </div>
     </div>
     <div class="main-content">
       <!-- 左侧菜单 -->
       <div class="side-menu">
-        <div v-for="item in menuList" :key="item.label" class="side-menu-item"
-          :class="{ active: item.label === curSideItem }" @click="onClickSideNav(item)">
+        <div
+          v-for="item in menuList"
+          :key="item.label"
+          class="side-menu-item"
+          :class="{ active: item.label === curSideItem }"
+          @click="onClickSideNav(item)"
+        >
           {{ item.label }}
         </div>
       </div>
