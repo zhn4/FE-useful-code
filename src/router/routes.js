@@ -142,14 +142,14 @@ const routes = [
     },
     component: () => import('../views/importExcelAndAnalyze/index.vue'),
   },
-  // {
-  //   path: '/importExcelByMulti',
-  //   name: 'importExcelByMulti',
-  //   meta: {
-  //     name: '导入多个银行流水Excel',
-  //   },
-  //   component: () => import('../views/importExcelByMulti/index.vue'),
-  // },
+  {
+    path: '/importExcelByMulti',
+    name: 'importExcelByMulti',
+    meta: {
+      name: '导入多个Excel',
+    },
+    component: () => import('../views/importExcelByMulti/index.vue'),
+  },
   // {
   //   path: '/dropForm',
   //   name: 'dropForm',
@@ -236,14 +236,22 @@ const routes = [
   //   },
   //   component: () => import('../views/trafficViolationReport/index.vue'),
   // },
-  // {
-  //   path: '/testPage',
-  //   name: 'testPage',
-  //   meta: {
-  //     name: '功能测试页',
-  //   },
-  //   component: () => import('../views/testPage/index.vue'),
-  // },
+  {
+    path: '/fxxxThing',
+    name: 'fxxxThing',
+    meta: {
+      name: 'fucking thing',
+    },
+    component: () => import('../views/fxxxThing/index.vue'),
+  },
+  {
+    path: '/testPage',
+    name: 'testPage',
+    meta: {
+      name: '功能测试页',
+    },
+    component: () => import('../views/testPage/index.vue'),
+  },
 ]
 
 export default routes
