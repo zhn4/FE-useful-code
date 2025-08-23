@@ -1,8 +1,8 @@
-const { defineConfig } = require("@vue/cli-service");
+const { defineConfig } = require('@vue/cli-service')
 module.exports = defineConfig({
   transpileDependencies: true,
   lintOnSave: false,
-  /* 
+  /*
     为了使用 github page 的设置
   */
   publicPath: '/FE-useful-code/',
@@ -19,11 +19,6 @@ module.exports = defineConfig({
     //   .use('markdown-loader')
     //     .loader('markdown-loader')
     //     .end()
-    config.module
-      .rule('md')
-      .test(/\.md$/)
-      .use('raw-loader')
-      .loader('raw-loader')
-      .end();
-  }
-});
+    config.module.rule('md').test(/\.md$/).use('raw-loader').loader('raw-loader').end()
+  },
+})
