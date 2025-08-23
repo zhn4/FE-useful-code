@@ -20,5 +20,32 @@ module.exports = defineConfig({
     //     .loader('markdown-loader')
     //     .end()
     config.module.rule('md').test(/\.md$/).use('raw-loader').loader('raw-loader').end()
+    // 生产环境才进行分包优化
+    if (process.env.NODE_ENV === 'production') {
+      config.optimization.splitChunks({
+        chunks: 'all',
+        cacheGroups: {
+          vendor: {
+            name: 'chunk-vendors',
+            test: /[\\/]node_modules[\\/]/,
+            priority: 10,
+            chunks: 'initial',
+          },
+          elementUI: {
+            name: 'chunk-elementUI',
+            priority: 20,
+            test: /[\\/]node_modules[\\/]_?element-ui(.*)/,
+          },
+        },
+      })
+    }
+  },
+  configureWebpack: config => {
+    if (process.env.NODE_ENV === 'production') {
+      // 生产环境外链Element UI
+      config.externals = {
+        'element-ui': 'ELEMENT',
+      }
+    }
   },
 })
