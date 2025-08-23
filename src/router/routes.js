@@ -245,6 +245,14 @@ const routes = [
     component: () => import('../views/fxxxThing/index.vue'),
   },
   {
+    path: '/recordCalendar',
+    name: 'recordCalendar',
+    meta: {
+      name: '日记',
+    },
+    component: () => import('../views/recordCalendar/index.vue'),
+  },
+  {
     path: '/testPage',
     name: 'testPage',
     meta: {
