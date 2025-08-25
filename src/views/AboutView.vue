@@ -2,9 +2,7 @@
   <div class="about">
     <h1>This is an about page</h1>
     <!-- <VeLine /> -->
-    <Bar id="my-chart-id"
-    :options="chartOptions"
-    :data="chartData" />
+    <Bar id="my-chart-id" :options="chartOptions" :data="chartData" />
   </div>
 </template>
 
@@ -15,21 +13,21 @@ import { Chart as ChartJS, Title, Tooltip, Legend, BarElement, CategoryScale, Li
 ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale)
 
 export default {
-  name: 'about',
+  name: 'aboutView',
   components: {
     // VeLine,
-    Bar
+    Bar,
   },
   data() {
     return {
       chartData: {
-        labels: [ 'January', 'February', 'March' ],
-        datasets: [ { data: [40, 20, 12] } ]
+        labels: ['January', 'February', 'March'],
+        datasets: [{ data: [40, 20, 12] }],
       },
       chartOptions: {
-        responsive: true
-      }
+        responsive: true,
+      },
     }
-  }
+  },
 }
 </script>

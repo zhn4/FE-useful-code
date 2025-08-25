@@ -17,13 +17,13 @@ export default {
   methods: {
     onBack() {
       this.$router.push({
-        path: '/'
+        path: '/',
       })
     },
     onCode() {
       const path = `https://github.com/zhn4/FE-useful-code/tree/master/src/views`
       window.open(`${path}/${this.$route.name}`, '_blank')
-    }
+    },
   },
 }
 </script>

@@ -29,7 +29,7 @@ export default {
     }
   },
   mounted() {
-    this.tableData = routes.filter((x) => x.meta)
+    this.tableData = routes.filter(x => x.meta)
   },
   methods: {
     onOpen(row) {
@@ -38,7 +38,6 @@ export default {
   },
 }
 </script>
-
 
 <style lang="less" scoped>
 .main-container {
