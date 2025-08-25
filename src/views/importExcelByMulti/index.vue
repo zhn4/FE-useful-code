@@ -61,6 +61,7 @@
 import * as XLSX from 'xlsx'
 
 export default {
+  name: 'importExcelByMulti',
   data() {
     return {
       form: {

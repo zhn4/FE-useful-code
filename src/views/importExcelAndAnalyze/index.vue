@@ -3,15 +3,11 @@
     <div class="top">
       <div>
         <el-tooltip class="box-item" effect="dark" :content="contentByTips" placement="top-start">
-          <el-button type="primary" @click="downloadTemplate">
-            下载 Excel 模板
-          </el-button>
+          <el-button type="primary" @click="downloadTemplate">下载 Excel 模板</el-button>
         </el-tooltip>
       </div>
       <div>
-        <el-button type="primary" @click="$refs.uploadRef.click()">
-          选择 Excel 文件
-        </el-button>
+        <el-button type="primary" @click="$refs.uploadRef.click()">选择 Excel 文件</el-button>
         <!-- 分析文件 -->
         <input ref="uploadRef" type="file" @change="handleFileUpload" accept=".xlsx, .xls" style="display: none" />
       </div>
@@ -27,10 +23,13 @@
     <div v-if="filteredTableData.length" class="bottom">
       <div class="b-left">
         <el-table :data="filteredTableData" height="100%" border style="width: 100%">
-          <el-table-column type="index" label="序号" width="60">
-          </el-table-column>
-          <el-table-column v-for="(header, index) in excelData[0]" :key="index" :prop="`col_${index}`" :label="header">
-          </el-table-column>
+          <el-table-column type="index" label="序号" width="60"></el-table-column>
+          <el-table-column
+            v-for="(header, index) in excelData[0]"
+            :key="index"
+            :prop="`col_${index}`"
+            :label="header"
+          ></el-table-column>
         </el-table>
       </div>
       <div class="b-right">
@@ -43,17 +42,17 @@
               </div>
               <ul>
                 <li>
-                  最高：<span class="mark-num" @click="
-                    handleFilteByTypeAndNum('收入(元)', moneyCount.maxIncome)
-                    ">
-                    {{ moneyCount.maxIncome || '-' }}</span>
+                  最高：
+                  <span class="mark-num" @click="handleFilteByTypeAndNum('收入(元)', moneyCount.maxIncome)">
+                    {{ moneyCount.maxIncome || '-' }}
+                  </span>
                   元
                 </li>
                 <li>
-                  最低：<span class="mark-num" @click="
-                    handleFilteByTypeAndNum('收入(元)', moneyCount.minIncome)
-                    ">
-                    {{ moneyCount.minIncome || '-' }}</span>
+                  最低：
+                  <span class="mark-num" @click="handleFilteByTypeAndNum('收入(元)', moneyCount.minIncome)">
+                    {{ moneyCount.minIncome || '-' }}
+                  </span>
                   元
                 </li>
                 <li>中位数：{{ moneyCount.medianIncome || '-' }} 元</li>
@@ -68,17 +67,17 @@
               </div>
               <ul>
                 <li>
-                  最高：<span class="mark-num" @click="
-                    handleFilteByTypeAndNum('支出(元)', moneyCount.maxExpense)
-                    ">
-                    {{ moneyCount.maxExpense || '-' }}</span>
+                  最高：
+                  <span class="mark-num" @click="handleFilteByTypeAndNum('支出(元)', moneyCount.maxExpense)">
+                    {{ moneyCount.maxExpense || '-' }}
+                  </span>
                   元
                 </li>
                 <li>
-                  最低：<span class="mark-num" @click="
-                    handleFilteByTypeAndNum('支出(元)', moneyCount.minExpense)
-                    ">
-                    {{ moneyCount.minExpense || '-' }}</span>
+                  最低：
+                  <span class="mark-num" @click="handleFilteByTypeAndNum('支出(元)', moneyCount.minExpense)">
+                    {{ moneyCount.minExpense || '-' }}
+                  </span>
                   元
                 </li>
                 <li>中位数：{{ moneyCount.medianExpense || '-' }} 元</li>
@@ -93,23 +92,17 @@
               </div>
               <ul>
                 <li>
-                  最高：<span class="mark-num" @click="
-                    handleFilteByTypeAndNum(
-                      '余额(元)',
-                      moneyCount.maxBalanceStat,
-                    )
-                    ">
-                    {{ moneyCount.maxBalanceStat || '-' }}</span>
+                  最高：
+                  <span class="mark-num" @click="handleFilteByTypeAndNum('余额(元)', moneyCount.maxBalanceStat)">
+                    {{ moneyCount.maxBalanceStat || '-' }}
+                  </span>
                   元
                 </li>
                 <li>
-                  最低：<span class="mark-num" @click="
-                    handleFilteByTypeAndNum(
-                      '余额(元)',
-                      moneyCount.minBalanceStat,
-                    )
-                    ">
-                    {{ moneyCount.minBalanceStat || '-' }}</span>
+                  最低：
+                  <span class="mark-num" @click="handleFilteByTypeAndNum('余额(元)', moneyCount.minBalanceStat)">
+                    {{ moneyCount.minBalanceStat || '-' }}
+                  </span>
                   元
                 </li>
                 <li>中位数：{{ moneyCount.medianBalance || '-' }} 元</li>
@@ -121,16 +114,20 @@
           <div class="statistics" style="width: 100%">
             <el-card class="box-card" style="width: 100%">
               <div slot="header" class="clearfix">
-                <div class="card-header"><el-icon size="14" style="margin-right: 4px;">
+                <div class="card-header">
+                  <el-icon size="14" style="margin-right: 4px">
                     <Tickets />
-                  </el-icon><span>交易类型统计</span></div>
+                  </el-icon>
+                  <span>交易类型统计</span>
+                </div>
                 <el-button type="text" @click="handleReset">重置</el-button>
               </div>
               <ul style="display: flex; flex-direction: row">
                 <li v-for="(count, type) in transactionStats" :key="type" style="margin-right: 20px">
                   {{ type }}:
-                  <span class="mark-num" sytle="margin-right: 20px;" @click="handleFilteByType(type)">{{ count }}
-                    笔</span>
+                  <span class="mark-num" sytle="margin-right: 20px;" @click="handleFilteByType(type)">
+                    {{ count }} 笔
+                  </span>
                 </li>
               </ul>
             </el-card>
@@ -142,12 +139,7 @@
         </div>
       </div>
     </div>
-    <div v-else class="bottom" style="
-        height: 100%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-      ">
+    <div v-else class="bottom" style="height: 100%; display: flex; justify-content: center; align-items: center">
       <el-empty description="请上传 Excel 文件" style="width: 100%; height: 100%" />
     </div>
   </div>
@@ -158,12 +150,12 @@ import * as XLSX from 'xlsx'
 
 import * as echarts from 'echarts'
 
-import EXCEL_DATA from './EXCEL_DATA'
+// import EXCEL_DATA from './EXCEL_DATA'
 
-import { Loading  } from 'element-ui'
+import { Loading } from 'element-ui'
 
 export default {
-  name: 'ImportExcel',
+  name: 'importExcelAndAnalyze',
   data() {
     return {
       excelData: [], // 用于存储解析后的 Excel 数据
@@ -200,7 +192,7 @@ export default {
   },
   methods: {
     handleFileUpload(event) {
-      Loading .service({
+      Loading.service({
         lock: true,
         text: '正在解析 Excel 文件...',
         spinner: 'el-icon-loading',
@@ -211,7 +203,7 @@ export default {
       if (!file) return
 
       const reader = new FileReader()
-      reader.onload = (e) => {
+      reader.onload = e => {
         const data = new Uint8Array(e.target.result)
         const workbook = XLSX.read(data, { type: 'array' })
 
@@ -224,7 +216,7 @@ export default {
         this.excelData = jsonData
 
         // 转换为 el-table 可用的数据格式
-        this.tableData = this.excelData.slice(1).map((row) => {
+        this.tableData = this.excelData.slice(1).map(row => {
           const rowData = {}
           row.forEach((cell, index) => {
             rowData[`col_${index}`] = cell
@@ -242,7 +234,7 @@ export default {
           this.initPieChart()
           this.initBarChart()
           setTimeout(() => {
-            Loading .service().close()
+            Loading.service().close()
           }, 800)
         })
         // 计算收入/支出/余额统计
@@ -260,7 +252,7 @@ export default {
 
       // 按交易类型分组统计
       const stats = {}
-      this.excelData.slice(1).forEach((row) => {
+      this.excelData.slice(1).forEach(row => {
         const type = row[typeIndex]
         if (type) {
           stats[type] = (stats[type] || 0) + 1
@@ -281,23 +273,14 @@ export default {
           this.moneyCount.minExpense =
           this.moneyCount.maxBalanceStat =
           this.moneyCount.minBalanceStat =
-          0
-        this.moneyCount.medianIncome =
-          this.moneyCount.medianExpense =
-          this.moneyCount.medianBalance =
-          0
+            0
+        this.moneyCount.medianIncome = this.moneyCount.medianExpense = this.moneyCount.medianBalance = 0
         return
       }
 
-      const incomes = this.excelData
-        .slice(1)
-        .map((row) => parseFloat(row[incomeIndex]) || 0)
-      const expenses = this.excelData
-        .slice(1)
-        .map((row) => parseFloat(row[expenseIndex]) || 0)
-      const balances = this.excelData
-        .slice(1)
-        .map((row) => parseFloat(row[balanceIndex]) || 0)
+      const incomes = this.excelData.slice(1).map(row => parseFloat(row[incomeIndex]) || 0)
+      const expenses = this.excelData.slice(1).map(row => parseFloat(row[expenseIndex]) || 0)
+      const balances = this.excelData.slice(1).map(row => parseFloat(row[balanceIndex]) || 0)
 
       this.moneyCount.maxIncome = Math.max(...incomes)
       this.moneyCount.minIncome = Math.min(...incomes)
@@ -311,7 +294,7 @@ export default {
       this.moneyCount.medianBalance = this.calculateMedian(balances)
     },
     calculateMedian(arr) {
-      const sorted = arr.filter((num) => !isNaN(num)).sort((a, b) => a - b)
+      const sorted = arr.filter(num => !isNaN(num)).sort((a, b) => a - b)
       const len = sorted.length
       if (len === 0) return 0
       const mid = Math.floor(len / 2)
@@ -376,16 +359,7 @@ export default {
     },
     downloadTemplate() {
       // 定义固定表头
-      const headers = [
-        '交易日期',
-        '交易类型',
-        '摘要说明',
-        '收入(元)',
-        '支出(元)',
-        '余额(元)',
-        '对方账户',
-        '备注',
-      ]
+      const headers = ['交易日期', '交易类型', '摘要说明', '收入(元)', '支出(元)', '余额(元)', '对方账户', '备注']
       const data = [headers] // 模板数据，只有表头
 
       // 创建工作簿和工作表
@@ -422,7 +396,7 @@ export default {
             //   { value: 735, name: '项目二' },
             //   { value: 580, name: '项目三' },
             // ],
-            data: Object.keys(this.transactionStats).map((type) => {
+            data: Object.keys(this.transactionStats).map(type => {
               return {
                 value: this.transactionStats[type],
                 name: type,
@@ -492,7 +466,7 @@ export default {
   padding: 10px 0;
 }
 
-.top>div {
+.top > div {
   margin-right: 20px;
 }
 
