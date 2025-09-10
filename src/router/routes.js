@@ -253,6 +253,14 @@ const routes = [
     component: () => import('../views/recordCalendar/index.vue'),
   },
   {
+    path: '/nodesAndSteps',
+    name: 'nodesAndSteps',
+    meta: {
+      name: '节点与步骤',
+    },
+    component: () => import('../views/nodesAndSteps/index.vue'),
+  },
+  {
     path: '/testPage',
     name: 'testPage',
     meta: {
