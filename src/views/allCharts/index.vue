@@ -6,9 +6,10 @@
       <el-tab-pane label="折线图" name="lineChart"></el-tab-pane>
       <el-tab-pane label="饼图" name="pieChart"></el-tab-pane>
       <el-tab-pane label="柱状图" name="barChart"></el-tab-pane> -->
-      <el-tab-pane label="田字格" name="fourCharts"> </el-tab-pane>
-      <el-tab-pane label="混合" name="mixCharts"> </el-tab-pane>
-      <el-tab-pane label="中国地图" name="chinaMap"> </el-tab-pane>
+      <el-tab-pane label="田字格" name="fourCharts"></el-tab-pane>
+      <el-tab-pane label="混合" name="mixCharts"></el-tab-pane>
+      <el-tab-pane label="中国地图" name="chinaMap"></el-tab-pane>
+      <el-tab-pane label="12个月柱状图" name="twelveMonthsBarChart"></el-tab-pane>
     </el-tabs>
 
     <!-- 动态组件切换 -->
@@ -22,8 +23,10 @@ import * as echarts from 'echarts'
 import fourCharts from './components/fourCharts.vue'
 import mixCharts from './components/mixCharts.vue'
 import chinaMap from './components/chinaMap.vue'
+import twelveMonthsBarChart from './components/twelveMonthsBarChart.vue'
 
 export default {
+  name: 'AllCharts',
   data() {
     return {
       activeTab: 'fourCharts', // 当前激活的标签
@@ -40,6 +43,7 @@ export default {
     fourCharts,
     mixCharts,
     chinaMap,
+    twelveMonthsBarChart,
     ListComponent: {
       template: `
         <div>
@@ -107,7 +111,7 @@ export default {
   },
   beforeDestroy() {
     window.removeEventListener('resize', this.handleResize) // 移除监听
-    this.charts.forEach((chart) => chart.dispose()) // 销毁图表实例
+    this.charts.forEach(chart => chart.dispose()) // 销毁图表实例
   },
   methods: {
     handleTabClick(tab) {
@@ -122,7 +126,7 @@ export default {
       this.currentComponent = tab.name
     },
     handleResize() {
-      this.charts.forEach((chart) => chart.resize()) // 调整每个图表的尺寸
+      this.charts.forEach(chart => chart.resize()) // 调整每个图表的尺寸
     },
   },
 }

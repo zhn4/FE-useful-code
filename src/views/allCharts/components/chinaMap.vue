@@ -9,6 +9,7 @@ import * as echarts from 'echarts'
 import '@/assets/map/china' // 引入中国地图数据
 
 export default {
+  name: 'ChinaMap',
   mounted() {
     this.initChinaMap()
     window.addEventListener('resize', this.handleResize) // 监听窗口尺寸变化

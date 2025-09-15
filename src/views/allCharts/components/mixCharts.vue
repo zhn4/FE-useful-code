@@ -51,6 +51,7 @@
 import * as echarts from 'echarts'
 
 export default {
+  name: 'MixCharts',
   data() {
     return {
       tableData: [
@@ -71,7 +72,7 @@ export default {
   },
   beforeDestroy() {
     window.removeEventListener('resize', this.handleResize) // 移除监听
-    this.charts.forEach((chart) => chart.dispose()) // 销毁图表实例
+    this.charts.forEach(chart => chart.dispose()) // 销毁图表实例
   },
   methods: {
     initLineChart() {
@@ -154,7 +155,7 @@ export default {
       this.charts.push(pieChart3)
     },
     handleResize() {
-      this.charts.forEach((chart) => chart.resize()) // 调整每个图表的尺寸
+      this.charts.forEach(chart => chart.resize()) // 调整每个图表的尺寸
     },
   },
 }
