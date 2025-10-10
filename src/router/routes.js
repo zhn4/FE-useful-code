@@ -261,6 +261,14 @@ const routes = [
     component: () => import('../views/nodesAndSteps/index.vue'),
   },
   {
+    path: '/mindMap',
+    name: 'mindMap',
+    meta: {
+      name: '思維导图',
+    },
+    component: () => import('../views/mindMap/index.vue'),
+  },
+  {
     path: '/testPage',
     name: 'testPage',
     meta: {
