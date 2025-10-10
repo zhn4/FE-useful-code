@@ -79,6 +79,13 @@ export default {
       const lineChart = echarts.init(this.$refs.lineChart)
       const option = {
         // title: { text: '折线图示例' },
+        grid: {
+          top: 20,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          containLabel: true,
+        },
         xAxis: { type: 'category', data: ['一月', '二月', '三月', '四月'] },
         yAxis: { type: 'value' },
         series: [{ data: [820, 932, 901, 934], type: 'line' }],
@@ -90,6 +97,13 @@ export default {
       const barChart = echarts.init(this.$refs.barChart)
       const option = {
         // title: { text: '柱状图示例' },
+        grid: {
+          top: 20,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          containLabel: true,
+        },
         xAxis: { type: 'category', data: ['一月', '二月', '三月', '四月'] },
         yAxis: { type: 'value' },
         series: [{ data: [120, 200, 150, 80], type: 'bar' }],
@@ -101,6 +115,13 @@ export default {
       const pieChart1 = echarts.init(this.$refs.pieChart1)
       const option = {
         // title: { text: '饼图 1', left: 'center' },
+        grid: {
+          top: 20,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          containLabel: true,
+        },
         series: [
           {
             type: 'pie',
@@ -120,6 +141,13 @@ export default {
       const pieChart2 = echarts.init(this.$refs.pieChart2)
       const option = {
         // title: { text: '饼图 2', left: 'center' },
+        grid: {
+          top: 20,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          containLabel: true,
+        },
         series: [
           {
             type: 'pie',
@@ -139,6 +167,13 @@ export default {
       const pieChart3 = echarts.init(this.$refs.pieChart3)
       const option = {
         // title: { text: '饼图 3', left: 'center' },
+        grid: {
+          top: 20,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          containLabel: true,
+        },
         series: [
           {
             type: 'pie',

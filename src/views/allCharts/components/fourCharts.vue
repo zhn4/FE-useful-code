@@ -63,6 +63,13 @@ export default {
       const lineChart = echarts.init(this.$refs.lineChart)
       const option = {
         // title: { text: '折线图示例' },
+        grid: {
+          top: 20,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          containLabel: true,
+        },
         xAxis: { type: 'category', data: ['一月', '二月', '三月', '四月'] },
         yAxis: { type: 'value' },
         series: [{ data: [820, 932, 901, 934], type: 'line' }],
@@ -74,6 +81,13 @@ export default {
       const pieChart = echarts.init(this.$refs.pieChart)
       const option = {
         // title: { text: '饼图示例', left: 'center' },
+        grid: {
+          top: 20,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          containLabel: true,
+        },
         series: [
           {
             type: 'pie',
@@ -93,6 +107,13 @@ export default {
       const barChart = echarts.init(this.$refs.barChart)
       const option = {
         // title: { text: '柱状图示例' },
+        grid: {
+          top: 20,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          containLabel: true,
+        },
         xAxis: { type: 'category', data: ['一月', '二月', '三月', '四月'] },
         yAxis: { type: 'value' },
         series: [{ data: [120, 200, 150, 80], type: 'bar' }],

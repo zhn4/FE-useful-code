@@ -10,6 +10,7 @@
       <el-tab-pane label="混合" name="mixCharts"></el-tab-pane>
       <el-tab-pane label="中国地图" name="chinaMap"></el-tab-pane>
       <el-tab-pane label="12个月柱状图" name="twelveMonthsBarChart"></el-tab-pane>
+      <el-tab-pane label="Graph 实现简单流程图" name="flowByGraph"></el-tab-pane>
     </el-tabs>
 
     <!-- 动态组件切换 -->
@@ -24,6 +25,7 @@ import fourCharts from './components/fourCharts.vue'
 import mixCharts from './components/mixCharts.vue'
 import chinaMap from './components/chinaMap.vue'
 import twelveMonthsBarChart from './components/twelveMonthsBarChart.vue'
+import flowByGraph from './components/flowByGraph.vue'
 
 export default {
   name: 'AllCharts',
@@ -44,6 +46,7 @@ export default {
     mixCharts,
     chinaMap,
     twelveMonthsBarChart,
+    flowByGraph,
     ListComponent: {
       template: `
         <div>
