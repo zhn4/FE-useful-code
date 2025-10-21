@@ -12,8 +12,7 @@
             range-separator="至"
             start-placeholder="开始日期"
             end-placeholder="结束日期"
-          >
-          </el-date-picker>
+          ></el-date-picker>
         </el-form-item>
         <el-form-item>
           <el-button type="primary" @click="onSearch" icon="el-icon-search">查询</el-button>
@@ -29,13 +28,13 @@
         <el-button type="primary" plain @click="onDeleteBatch">批量删除</el-button>
       </div>
       <el-table :data="tableData" border style="width: 100%" height="100%">
-        <el-table-column type="selection" width="55" align="center"> </el-table-column>
-        <el-table-column type="index" label="序号" width="55" align="center"> </el-table-column>
-        <el-table-column prop="date" label="名称" width="180" align="center"> </el-table-column>
-        <el-table-column prop="date" label="年度" width="180" align="center"> </el-table-column>
-        <el-table-column prop="date" label="创建人" width="180" align="center"> </el-table-column>
-        <el-table-column prop="date" label="创建时间" width="180" align="center"> </el-table-column>
-        <el-table-column prop="desc" label="备注" align="center"> </el-table-column>
+        <el-table-column type="selection" width="55" align="center"></el-table-column>
+        <el-table-column type="index" label="序号" width="55" align="center"></el-table-column>
+        <el-table-column prop="date" label="名称" width="180" align="center"></el-table-column>
+        <el-table-column prop="date" label="年度" width="180" align="center"></el-table-column>
+        <el-table-column prop="date" label="创建人" width="180" align="center"></el-table-column>
+        <el-table-column prop="date" label="创建时间" width="180" align="center"></el-table-column>
+        <el-table-column prop="desc" label="备注" align="center"></el-table-column>
         <el-table-column fixed="right" label="操作" width="100" align="center">
           <template slot-scope="scope">
             <el-button type="text" @click="onCheck">查看</el-button>
@@ -53,8 +52,7 @@
         :page-size="pageSize"
         layout="total, sizes, prev, pager, next, jumper"
         :total="total"
-      >
-      </el-pagination>
+      ></el-pagination>
     </div>
   </div>
 </template>

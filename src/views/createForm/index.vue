@@ -2,7 +2,7 @@
   <div class="create-form">
     <h2>创建调查问卷</h2>
     <div class="main">
-      <el-form ref="formTableRef" :model="form" :rules="rules" style="height: 100%;">
+      <el-form ref="formTableRef" :model="form" :rules="rules" style="height: 100%">
         <el-table :data="form.tableData" border style="width: 100%" height="100%">
           <el-table-column prop="txt" label="问题内容" align="center">
             <template slot-scope="scope">
@@ -48,12 +48,25 @@
           <el-table-column label="操作" align="center" width="80">
             <template slot-scope="scope">
               <div class="btns">
-                <el-button type="text" @click="onMoveTopByItem(scope.$index)" icon="el-icon-top"
-                  :disabled="scope.$index === 0">上移</el-button>
-                <el-button type="text" style="color: red;" @click="onDeleteByItem(scope.$index)"
-                  icon="el-icon-delete">删除</el-button>
-                <el-button type="text" @click="onMoveBottomByItem(scope.$index)" icon="el-icon-bottom"
-                  :disabled="scope.$index === form.tableData.length - 1">下移</el-button>
+                <el-button
+                  type="text"
+                  @click="onMoveTopByItem(scope.$index)"
+                  icon="el-icon-top"
+                  :disabled="scope.$index === 0"
+                >
+                  上移
+                </el-button>
+                <el-button type="text" style="color: red" @click="onDeleteByItem(scope.$index)" icon="el-icon-delete">
+                  删除
+                </el-button>
+                <el-button
+                  type="text"
+                  @click="onMoveBottomByItem(scope.$index)"
+                  icon="el-icon-bottom"
+                  :disabled="scope.$index === form.tableData.length - 1"
+                >
+                  下移
+                </el-button>
               </div>
             </template>
           </el-table-column>
@@ -61,27 +74,36 @@
       </el-form>
 
       <el-drawer title="预览" :visible.sync="drawerVisible" size="500px">
-        <div style="padding: 0 20px;">
-          <el-form ref="reviewFormRef" :model="formConstrator" :rules="rulesConstrator" label-position="top"
-            label-width="80px">
+        <div style="padding: 0 20px">
+          <el-form
+            ref="reviewFormRef"
+            :model="formConstrator"
+            :rules="rulesConstrator"
+            label-position="top"
+            label-width="80px"
+          >
             <template v-for="(ques, index) in form.tableData">
               <el-form-item :label="ques.txt" :prop="ques.txtCode" :key="index">
                 <template v-if="ques.type === 'textarea'">
-                  <el-input type="textarea" :rows="4" v-model="formConstrator[ques.txtCode]"
-                    placeholder="请输入"></el-input>
+                  <el-input
+                    type="textarea"
+                    :rows="4"
+                    v-model="formConstrator[ques.txtCode]"
+                    placeholder="请输入"
+                  ></el-input>
                 </template>
                 <template v-if="ques.type === 'radio'">
                   <el-radio-group v-model="formConstrator[ques.txtCode]">
-                    <el-radio v-for="(option, i) in ques.typeOptions || []" :key="i" :label="option.value">{{
-                      option.label
-                    }}</el-radio>
+                    <el-radio v-for="(option, i) in ques.typeOptions || []" :key="i" :label="option.value">
+                      {{ option.label }}
+                    </el-radio>
                   </el-radio-group>
                 </template>
                 <template v-if="ques.type === 'checkbox'">
                   <el-checkbox-group v-model="formConstrator[ques.txtCode]">
-                    <el-checkbox v-for="(option, i) in ques.typeOptions || []" :key="i" :label="option.value">{{
-                      option.label
-                    }}</el-checkbox>
+                    <el-checkbox v-for="(option, i) in ques.typeOptions || []" :key="i" :label="option.value">
+                      {{ option.label }}
+                    </el-checkbox>
                   </el-checkbox-group>
                 </template>
               </el-form-item>
@@ -94,7 +116,7 @@
         </div>
       </el-drawer>
     </div>
-    <div style="width: 100%; text-align: center; margin: 10px 0;">
+    <div style="width: 100%; text-align: center; margin: 10px 0">
       <el-button type="primary" @click="onAddByQuestion">新建问题</el-button>
       <el-button type="warning" @click="onReview">预览</el-button>
     </div>
@@ -134,7 +156,7 @@ export default {
                 label: '选项2',
                 value: 'option2',
               },
-            ]
+            ],
           },
           {
             txt: '问题3',
@@ -154,7 +176,7 @@ export default {
                 label: '选项3',
                 value: 'option3',
               },
-            ]
+            ],
           },
         ],
       },
@@ -247,7 +269,7 @@ export default {
         this.form.tableData.splice(index + 1, 0, item)
       }
     },
-  }
+  },
 }
 </script>
 
@@ -265,7 +287,7 @@ export default {
   }
 
   .btns {
-    .el-button+.el-button {
+    .el-button + .el-button {
       margin: 0;
     }
   }

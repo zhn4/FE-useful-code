@@ -58,7 +58,7 @@ export default {
         return this.$message.error('正在加载中，请稍后再试')
       }
       this.loading = true
-      this.selectedItem = this.items.find((item) => item.id.toString() === index) || null
+      this.selectedItem = this.items.find(item => item.id.toString() === index) || null
       setTimeout(() => {
         this.loading = false
       }, 400)
