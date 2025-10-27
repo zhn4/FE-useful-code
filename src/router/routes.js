@@ -277,6 +277,14 @@ const routes = [
     component: () => import('../views/editorByFlow/index.vue'),
   },
   {
+    path: '/purchaseRecords',
+    name: 'purchaseRecords',
+    meta: {
+      name: '消费记录',
+    },
+    component: () => import('../views/purchaseRecords/index.vue'),
+  },
+  {
     path: '/testPage',
     name: 'testPage',
     meta: {
