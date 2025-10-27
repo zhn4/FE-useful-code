@@ -269,6 +269,14 @@ const routes = [
     component: () => import('../views/mindMap/index.vue'),
   },
   {
+    path: '/editorByFlow',
+    name: 'editorByFlow',
+    meta: {
+      name: '流程图编辑器',
+    },
+    component: () => import('../views/editorByFlow/index.vue'),
+  },
+  {
     path: '/testPage',
     name: 'testPage',
     meta: {
