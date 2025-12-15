@@ -41,37 +41,37 @@
         <el-form ref="formByDetalRef" :model="formByProcess" label-width="140px">
           <el-row>
             <el-col :span="12">
-              <el-form-item label="巡视方式：">
+              <el-form-item label="xx视方式：">
                 <span class="value">{{ formByProcess.prop01 }}</span>
               </el-form-item>
             </el-col>
             <el-col :span="12">
-              <el-form-item label="巡视组：">
+              <el-form-item label="xx组：">
                 <span class="value">{{ formByProcess.prop02 }}</span>
               </el-form-item>
             </el-col>
             <el-col :span="12">
-              <el-form-item label="组长：">
+              <el-form-item label="x长：">
                 <span class="value">{{ formByProcess.prop03 }}</span>
               </el-form-item>
             </el-col>
             <el-col :span="12">
-              <el-form-item label="联络员：">
+              <el-form-item label="xx员：">
                 <span class="value">{{ formByProcess.prop04 }}</span>
               </el-form-item>
             </el-col>
             <el-col :span="12">
-              <el-form-item label="副联络员：">
+              <el-form-item label="xxx员：">
                 <span class="value">{{ formByProcess.prop05 }}</span>
               </el-form-item>
             </el-col>
             <el-col :span="12">
-              <el-form-item label="巡视人员：">
+              <el-form-item label="xx人员：">
                 <span class="value">{{ formByProcess.prop06 }}</span>
               </el-form-item>
             </el-col>
             <el-col :span="24">
-              <el-form-item label="巡视时间：">
+              <el-form-item label="xx时间：">
                 <span class="value">{{ formByProcess.prop07 }}</span>
               </el-form-item>
             </el-col>
