@@ -185,12 +185,12 @@ export default defineComponent({
       isEditMode: true, // 是否编辑模式
       dialogVisible: false,
       formByProcess: {
-        prop01: `常规巡视`,
-        prop02: `第一巡视组`,
-        prop03: `何泽彬`,
-        prop04: `姜明凯`,
-        prop05: `陈一`,
-        prop06: `张伟、李明、王芳、赵丽`,
+        prop01: `常规xx`,
+        prop02: `第一xx组`,
+        prop03: `诸葛亮`,
+        prop04: `赵云`,
+        prop05: `周瑜`,
+        prop06: `刘备、张飞、关羽`,
         prop07: `2027年4月21日-2027年9月12日`,
         prop08: `进行中`,
         prop09: `2026.06.15 前完成`,
