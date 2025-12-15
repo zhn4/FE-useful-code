@@ -285,6 +285,30 @@ const routes = [
     component: () => import('../views/purchaseRecords/index.vue'),
   },
   {
+    path: '/usefulCharts',
+    name: 'usefulCharts',
+    meta: {
+      name: '有用图表配置',
+    },
+    component: () => import('../views/usefulCharts/index.vue'),
+  },
+  {
+    path: '/threeGrid',
+    name: 'threeGrid',
+    meta: {
+      name: '3格联动',
+    },
+    component: () => import('../views/threeGrid/index.vue'),
+  },
+  {
+    path: '/classicLayout',
+    name: 'classicLayout',
+    meta: {
+      name: '经典布局',
+    },
+    component: () => import('../views/classicLayout/index.vue'),
+  },
+  {
     path: '/testPage',
     name: 'testPage',
     meta: {

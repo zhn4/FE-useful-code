@@ -1,6 +1,6 @@
 <template>
   <div class="test-page">
-    <div class="video-part">
+    <!-- <div class="video-part">
       <video
         ref="video"
         autoplay
@@ -23,14 +23,27 @@
           </div>
         </template>
       </div>
-    </div>
+    </div> -->
+    <!-- <FlowChart /> -->
+    <!-- <VueSuperFlow /> -->
+    <AntvPage />
   </div>
 </template>
 
 <script>
 import Tesseract from 'tesseract.js'
 
+// import FlowChart from './components/FlowChart.vue'
+
+import VueSuperFlow from './components/VueSuperFlow.vue'
+import AntvPage from './components/AntvPage.vue'
+
 export default {
+  components: {
+    // FlowChart,
+    VueSuperFlow,
+    AntvPage,
+  },
   data() {
     return {
       stream: null,
@@ -89,10 +102,10 @@ export default {
 .test-page {
   width: 100%;
   height: 100%;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
+  // display: flex;
+  // flex-direction: row;
+  // justify-content: center;
+  // align-items: center;
 }
 
 .video-part {
