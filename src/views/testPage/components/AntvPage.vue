@@ -2,6 +2,11 @@
   <div class="app-content">
     <div class="btns">
       <div>
+        <el-button type="primary" @click="onTriggerByLine(`blueArrow`)">蓝色+箭头</el-button>
+        <el-button type="primary" @click="onTriggerByLine(`grayLarge`)">灰-粗</el-button>
+        <el-button type="primary" @click="onTriggerByLine(`graySmall`)">灰-细</el-button>
+      </div>
+      <div>
         编辑模式
         <el-switch v-model="isEditMode" active-color="#13ce66" inactive-color="#ff4949"></el-switch>
       </div>
@@ -17,8 +22,11 @@
 
     <el-drawer title="我是标题" :visible.sync="visible">
       <el-form ref="form" :model="form" label-width="80px">
-        <el-form-item label="节点名称">
+        <el-form-item label="节点名称：">
           <el-input v-model="form.label"></el-input>
+        </el-form-item>
+        <el-form-item label="颜色：">
+          <el-color-picker v-model="form.color"></el-color-picker>
         </el-form-item>
         <el-form-item>
           <el-button type="primary" @click="onConfirm">确认</el-button>
@@ -29,6 +37,7 @@
 
     <el-dialog
       ref="dialogRef"
+      :title="currentTitle"
       :visible.sync="dialogVisible"
       width="660px"
       :modal="false"
@@ -37,6 +46,7 @@
       :style="dialogStyle"
       @opened="onOpened"
     >
+      <div slot="title" class="modify-dialog-title">{{ currentTitle }}</div>
       <div>
         <el-form ref="formByDetalRef" :model="formByProcess" label-width="140px">
           <el-row>
@@ -112,64 +122,66 @@
 <script>
 import { defineComponent } from 'vue'
 // import { Graph, Stencil } from '@antv/x6'
-import { Clipboard, Graph, History, Keyboard, Selection, Shape, Snapline, Stencil, Transform } from '@antv/x6'
+import { Clipboard, Graph, History, Keyboard, Selection, Shape, Snapline, Stencil, Transform, Scroller } from '@antv/x6'
 
-const nodeData = {
-  nodes: [
-    {
-      id: 'node1',
-      shape: 'rect',
-      x: 40,
-      y: 40,
-      width: 100,
-      height: 40,
-      label: 'hello',
-      attrs: {
-        // body 是选择器名称，选中的是 rect 元素
-        body: {
-          stroke: '#8f8f8f',
-          strokeWidth: 1,
-          fill: '#fff',
-          rx: 6,
-          ry: 6,
-        },
-      },
-    },
-    {
-      id: 'node2',
-      shape: 'rect',
-      x: 160,
-      y: 180,
-      width: 100,
-      height: 40,
-      label: 'world',
-      attrs: {
-        body: {
-          stroke: '#8f8f8f',
-          strokeWidth: 1,
-          fill: '#fff',
-          rx: 6,
-          ry: 6,
-        },
-      },
-    },
-  ],
-  edges: [
-    {
-      shape: 'edge',
-      source: 'node1',
-      target: 'node2',
-      label: 'x6',
-      attrs: {
-        // line 是选择器名称，选中的边的 path 元素
-        line: {
-          stroke: '#8f8f8f',
-          strokeWidth: 1,
-        },
-      },
-    },
-  ],
-}
+// const nodeData = {
+//   nodes: [
+//     {
+//       id: 'node1',
+//       shape: 'rect',
+//       x: 40,
+//       y: 40,
+//       width: 100,
+//       height: 40,
+//       label: 'hello',
+//       attrs: {
+//         // body 是选择器名称，选中的是 rect 元素
+//         body: {
+//           stroke: '#8f8f8f',
+//           strokeWidth: 1,
+//           fill: '#fff',
+//           rx: 6,
+//           ry: 6,
+//         },
+//       },
+//     },
+//     {
+//       id: 'node2',
+//       shape: 'rect',
+//       x: 160,
+//       y: 180,
+//       width: 100,
+//       height: 40,
+//       label: 'world',
+//       attrs: {
+//         body: {
+//           stroke: '#8f8f8f',
+//           strokeWidth: 1,
+//           fill: '#fff',
+//           rx: 6,
+//           ry: 6,
+//         },
+//       },
+//     },
+//   ],
+//   edges: [
+//     {
+//       shape: 'edge',
+//       source: 'node1',
+//       target: 'node2',
+//       label: 'x6',
+//       attrs: {
+//         // line 是选择器名称，选中的边的 path 元素
+//         line: {
+//           stroke: '#8f8f8f',
+//           strokeWidth: 1,
+//         },
+//       },
+//     },
+//   ],
+// }
+
+import nodeData from '../nodeData.js'
 
 export default defineComponent({
   name: 'AntvPage',
@@ -179,6 +191,7 @@ export default defineComponent({
       visible: false,
       form: {
         label: '',
+        color: '',
       },
       currentNode: null,
       isEdgeWithArrow: true, // 连接线是否带箭头
@@ -203,12 +216,33 @@ export default defineComponent({
         left: '0px',
         margin: '0', // 覆盖 Element 默认 margin: auto
       },
+      currentTitle: ``,
+      lineType: ``,
     }
   },
   mounted() {
-    this.initGraph(this.$refs.containerRef.clientWidth, this.$refs.containerRef.clientHeight)
+    this.initGraph(this.$refs.containerRef.clientWidth - 40, this.$refs.containerRef.clientHeight - 40)
     console.log(this.$refs.containerRef.clientWidth)
     console.log(this.$refs.containerRef.clientHeight)
+    setTimeout(() => {
+      if (localStorage.getItem(`x6JSON`)) {
+        this.onLoad()
+      } else {
+        let currentData = {
+          nodes: [],
+          edges: [],
+        }
+        nodeData.forEach(x => {
+          if (x.shape !== 'edge') {
+            currentData.nodes.push(x)
+          } else {
+            currentData.edges.push(x)
+          }
+        })
+        this.graphObj.fromJSON(currentData) // 渲染元素
+        this.graphObj.centerContent() // 居中显示
+      }
+    }, 800)
   },
   methods: {
     initGraph(containerWidth = 800, containerHeight = 800) {
@@ -225,13 +259,18 @@ export default defineComponent({
           size: 10, // 网格大小 10px
           visible: true, // 绘制网格，默认绘制 dot 类型网格
         },
-        panning: {
-          enabled: true, // 允许平移
-        },
+        // panning: {
+        //   enabled: true, // 允许平移
+        // },
+        // panning: true,
+        // panOnBlank: true,
         mousewheel: {
-          enabled: true, // 鼠标滚轮缩放
-          modifiers: ['ctrl', 'meta'],
+          enabled: true,
+          minScale: 0.5,
+          maxScale: 3,
         },
+        // 🔒 关键：禁用多选（包括框选和 Shift/Ctrl 多选）
+        selecting: false,
         connecting: {
           router: {
             name: 'manhattan', // 折线
@@ -249,26 +288,75 @@ export default defineComponent({
           },
           // NOTE: 这里设计成闭包，根据isEdgeWithArrow的值来判断是否带有箭头
           createEdge: () => {
+            let lineConfig = null
+            switch (this.lineType) {
+              case `blueArrow`:
+                lineConfig = {
+                  stroke: '#2590FF',
+                  strokeWidth: 4,
+                  targetMarker: {
+                    name: 'block', // 箭头样式为实心块
+                    width: 6,
+                    height: 12,
+                  },
+                }
+                break
+              case `grayLarge`:
+                lineConfig = {
+                  stroke: '#6584A4',
+                  strokeWidth: 2,
+                  targetMarker: null,
+                }
+                break
+              case `graySmall`:
+                lineConfig = {
+                  stroke: '#6584A4',
+                  strokeWidth: 1,
+                  targetMarker: null,
+                }
+                break
+              default:
+                lineConfig = {
+                  stroke: '#2590FF',
+                  strokeWidth: 4,
+                  targetMarker: {
+                    name: 'block', // 箭头样式为实心块
+                    width: 6,
+                    height: 12,
+                  },
+                }
+                break
+            }
             return new Shape.Edge({
               attrs: {
-                line: {
-                  stroke: '#A2B1C3',
-                  // stroke: '#000',
-                  strokeWidth: 2,
-                  targetMarker: this.isEdgeWithArrow
-                    ? {
-                        name: 'block', // 箭头样式为实心块
-                        width: 12,
-                        height: 8,
-                      }
-                    : null,
-                },
+                // line: {
+                //   stroke: '#A2B1C3',
+                //   // stroke: '#000',
+                //   strokeWidth: 2,
+                //   targetMarker: this.isEdgeWithArrow
+                //     ? {
+                //         name: 'block', // 箭头样式为实心块
+                //         width: 6,
+                //         height: 12,
+                //       }
+                //     : null,
+                // },
+                line: lineConfig,
               },
               zIndex: 0,
             })
           },
         },
       })
+
+      graph.use(
+        new Scroller({
+          enabled: true,
+          // pageVisible: true,
+          // pageBreak: true,
+          // pannable: true,
+        }),
+      )
 
       this.initPlugin(graph)
 
@@ -366,18 +454,18 @@ export default defineComponent({
           attrs: {
             label: {
               text: '方形节点',
-              fill: '#333',
+              fill: '#FFF',
             },
             body: {
-              rx: 8,
-              ry: 8,
+              rx: 4,
+              ry: 4,
               strokeWidth: 1,
-              stroke: '#5F95FF',
-              fill: '#EFF4FF',
+              stroke: '#2590FF', // 边框颜色
+              fill: '#2590FF', // 填充色
             },
             text: {
-              fontSize: 12,
-              fill: '#262626',
+              fontSize: 16,
+              fill: '#FFF',
             },
           },
           ports: { ...ports },
@@ -391,19 +479,60 @@ export default defineComponent({
           inherit: 'circle',
           width: 120,
           height: 120,
+          // markup: [
+          //   {
+          //     tagName: 'circle',
+          //     selector: 'body',
+          //   },
+          // ],
+          // attrs: {
+          //   label: {
+          //     text: '圆形节点',
+          //     fill: '#FFF',
+          //   },
+          //   text: {
+          //     fontSize: 16,
+          //     fill: '#FFF',
+          //   },
+          //   body: {
+          //     cx: 60, // 圆心X坐标
+          //     cy: 60, // 圆心Y坐标
+          //     r: 60, // 半径
+          //     fill: {
+          //       type: 'radialGradient',
+          //       stops: [
+          //         { offset: '0%', color: 'rgba(242,250,255,0.88)' }, // 起始颜色
+          //         { offset: '60%', color: 'rgba(141,182,255,0)' }, // 结束颜色
+          //       ],
+          //       cx: 0.29, // 渐变中心点X坐标比例
+          //       cy: 0.13, // 渐变中心点Y坐标比例
+          //     },
+          //     stroke: '#1681F1', // 边框颜色，模拟背景色
+          //     strokeWidth: 1, // 边框宽度
+          //     filter: {
+          //       name: 'dropShadow',
+          //       args: {
+          //         dx: 0,
+          //         dy: -5,
+          //         blur: 12,
+          //         color: 'rgba(255,255,255,0.4)',
+          //       },
+          //     },
+          //   },
+          // },
           attrs: {
             label: {
               text: '圆形节点',
-              fill: '#333',
+              fill: '#FFF',
             },
             body: {
               strokeWidth: 1,
-              stroke: '#5F95FF',
-              fill: '#EFF4FF',
+              stroke: '#2590FF',
+              fill: '#1681F1',
             },
             text: {
-              fontSize: 12,
-              fill: '#262626',
+              fontSize: 16,
+              fill: '#FFF',
             },
           },
           ports: { ...ports },
@@ -412,22 +541,22 @@ export default defineComponent({
       )
       // NOTE: 注册方形节点
       Graph.registerNode(
-        'custom-rect',
+        'custom-rect-small',
         {
           inherit: 'rect',
-          width: 120,
-          height: 30,
+          width: 128,
+          height: 20,
           attrs: {
             label: {
               text: '方形细长节点',
-              fill: '#333',
+              fill: '#FFF',
             },
             body: {
-              rx: 8,
-              ry: 8,
+              rx: 4,
+              ry: 4,
               strokeWidth: 1,
-              stroke: '#5F95FF',
-              fill: '#EFF4FF',
+              stroke: '#2590FF',
+              fill: '#2590FF',
             },
             text: {
               fontSize: 12,
@@ -445,7 +574,7 @@ export default defineComponent({
         target: graph,
         stencilGraphWidth: 200,
         stencilGraphHeight: 800,
-        stencilGraphOptions: { panning: true },
+        // stencilGraphOptions: { panning: true },
         collapsable: true,
         groups: [
           {
@@ -493,7 +622,7 @@ export default defineComponent({
       })
 
       const squareBySmall = graph.createNode({
-        shape: 'custom-rect',
+        shape: 'custom-rect-small',
         label: '方形细长节点',
         // attrs: {
         //   body: {
@@ -635,6 +764,7 @@ export default defineComponent({
           console.log(`编辑模式，单击节点，编辑数据`)
         } else {
           console.log(`非编辑模式，单击节点，查看流程数据`)
+          this.currentTitle = node.attrs.label.text
           this.handleOpenDialog(e)
         }
       })
@@ -644,6 +774,7 @@ export default defineComponent({
         this.visible = true
         this.currentNode = node
         this.form.label = node.label
+        this.form.color = node.attrs.body.fill
         // node.setAttrs({
         //   label: {
         //     text: '新文本',
@@ -687,6 +818,10 @@ export default defineComponent({
         label: {
           text: this.form.label,
         },
+        body: {
+          fill: this.form.color,
+          stroke: this.form.color,
+        },
       })
       this.visible = false
     },
@@ -718,6 +853,9 @@ export default defineComponent({
         dialog.style.position = 'fixed'
         dialog.style.margin = '0'
       }
+    },
+    onTriggerByLine(lineType) {
+      this.lineType = lineType
     },
   },
 })
@@ -760,5 +898,13 @@ export default defineComponent({
 
 .value {
   color: #333;
+}
+
+.modify-dialog-title {
+  font-size: 16px;
+  color: #2590ff;
+  text-align: left;
+  line-height: 16px;
+  font-weight: 700;
 }
 </style>
