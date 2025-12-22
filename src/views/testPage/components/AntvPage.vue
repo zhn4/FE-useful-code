@@ -20,7 +20,7 @@
       </div>
     </div>
 
-    <el-drawer title="我是标题" :visible.sync="visible">
+    <el-drawer title="我是标题" :visible.sync="visible" append-to-body>
       <el-form ref="form" :model="form" label-width="80px">
         <el-form-item label="节点名称：">
           <el-input v-model="form.label"></el-input>
@@ -102,7 +102,8 @@
             </el-col>
             <el-col :span="24">
               <el-form-item label="跳转链接：">
-                <span class="value">{{ formByProcess.prop11 }}</span>
+                <el-button type="text" @click="goToPath(formByProcess.prop12)">{{ formByProcess.prop11 }}</el-button>
+                <!-- <span class="value">{{ formByProcess.prop11 }}</span> -->
               </el-form-item>
             </el-col>
           </el-row>
@@ -150,6 +151,7 @@ export default {
         prop09: `2026.06.15 前完成`,
         prop10: ``,
         prop11: ``,
+        prop12: ``,
       },
       dialogStyle: {
         position: 'fixed',
@@ -279,17 +281,20 @@ export default {
       })
 
       this.initPlugin(graph)
-
       this.initKeyBoardAndEvent(graph)
-
-      this.initNodeEventAndPorts(graph)
-
+      this.initNodePorts(graph)
+      this.initNodeEvent(graph)
       this.initNode()
-
       this.initStencil(graph)
 
-      // graph.fromJSON(nodeData) // 渲染元素
-      // graph.centerContent() // 居中显示
+      // // NOTE: 纯展示模式 start
+      // // this.initPlugin(graph)
+      // this.initKeyBoardAndEvent(graph)
+      // // this.initNodePorts(graph)
+      // this.initNodeEvent(graph)
+      // this.initNode()
+      // // this.initStencil(graph)
+      // // NOTE: 纯展示模式 end
 
       this.graphObj = graph
     },
@@ -391,7 +396,7 @@ export default {
       })
     },
     // 控制连接桩显示/隐藏
-    initNodeEventAndPorts(graph) {
+    initNodePorts(graph) {
       const showPorts = (ports, show) => {
         for (let i = 0, len = ports.length; i < len; i += 1) {
           ports[i].style.visibility = show ? 'visible' : 'hidden'
@@ -407,7 +412,9 @@ export default {
         const ports = container.querySelectorAll('.x6-port-body')
         showPorts(ports, false)
       })
-
+    },
+    // 节点事件监听
+    initNodeEvent(graph) {
       // graph.on('node:contextmenu', ({ e, x, y, node, view }) => {
       //   console.log('node:contextmenu', e, x, y, node, view)
       //   this.visible = true
@@ -419,7 +426,6 @@ export default {
       //   //   },
       //   // })
       // })
-
       graph.on('node:click', ({ e, x, y, node, view }) => {
         console.log('node:click', e, x, y, node, view)
         if (this.isEditMode) {
@@ -555,47 +561,6 @@ export default {
           inherit: 'circle',
           width: 120,
           height: 120,
-          // markup: [
-          //   {
-          //     tagName: 'circle',
-          //     selector: 'body',
-          //   },
-          // ],
-          // attrs: {
-          //   label: {
-          //     text: '圆形节点',
-          //     fill: '#FFF',
-          //   },
-          //   text: {
-          //     fontSize: 16,
-          //     fill: '#FFF',
-          //   },
-          //   body: {
-          //     cx: 60, // 圆心X坐标
-          //     cy: 60, // 圆心Y坐标
-          //     r: 60, // 半径
-          //     fill: {
-          //       type: 'radialGradient',
-          //       stops: [
-          //         { offset: '0%', color: 'rgba(242,250,255,0.88)' }, // 起始颜色
-          //         { offset: '60%', color: 'rgba(141,182,255,0)' }, // 结束颜色
-          //       ],
-          //       cx: 0.29, // 渐变中心点X坐标比例
-          //       cy: 0.13, // 渐变中心点Y坐标比例
-          //     },
-          //     stroke: '#1681F1', // 边框颜色，模拟背景色
-          //     strokeWidth: 1, // 边框宽度
-          //     filter: {
-          //       name: 'dropShadow',
-          //       args: {
-          //         dx: 0,
-          //         dy: -5,
-          //         blur: 12,
-          //         color: 'rgba(255,255,255,0.4)',
-          //       },
-          //     },
-          //   },
-          // },
           attrs: {
             label: {
               text: '圆形节点',
