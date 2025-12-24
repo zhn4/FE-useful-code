@@ -139,12 +139,160 @@
 </template>
 
 <script>
-import { Clipboard, Graph, History, Keyboard, Selection, Shape, Snapline, Stencil, Transform, Scroller } from '@antv/x6'
+import {
+  Clipboard,
+  Graph,
+  History,
+  Keyboard,
+  Selection,
+  Shape,
+  Snapline,
+  Stencil,
+  Transform,
+  Scroller,
+  Node,
+  Edge,
+} from '@antv/x6'
 
 import nodeData from './nodeData.js'
 
 import 'vanilla-jsoneditor/themes/jse-theme-dark.css'
 import JsonEditorVue from 'json-editor-vue'
+
+// 定义节点
+class TreeNode extends Node {
+  constructor(options) {
+    super(options)
+    this.toggleButtonVisibility(true)
+    this.toggleCollapse(true)
+  }
+
+  isCollapsed() {
+    return this.collapsed
+  }
+
+  toggleButtonVisibility(visible) {
+    this.attr('buttonGroup', {
+      display: visible ? 'block' : 'none',
+    })
+  }
+
+  toggleCollapse(collapsed) {
+    const target = collapsed == null ? !this.collapsed : collapsed
+    if (!target) {
+      this.attr('buttonSign', {
+        d: 'M 1 5 9 5 M 5 1 5 9',
+        strokeWidth: 1.6,
+      })
+    } else {
+      this.attr('buttonSign', {
+        d: 'M 2 5 8 5',
+        strokeWidth: 1.8,
+      })
+    }
+    this.collapsed = target
+  }
+}
+
+TreeNode.config({
+  zIndex: 2,
+  markup: [
+    {
+      tagName: 'g',
+      selector: 'buttonGroup',
+      children: [
+        {
+          tagName: 'rect',
+          selector: 'button',
+          attrs: {
+            'pointer-events': 'visiblePainted',
+          },
+        },
+        {
+          tagName: 'path',
+          selector: 'buttonSign',
+          attrs: {
+            fill: 'none',
+            'pointer-events': 'none',
+          },
+        },
+      ],
+    },
+    {
+      tagName: 'rect',
+      selector: 'body',
+    },
+    {
+      tagName: 'text',
+      selector: 'label',
+    },
+  ],
+  attrs: {
+    body: {
+      refWidth: '100%',
+      refHeight: '100%',
+      strokeWidth: 1,
+      fill: '#EFF4FF',
+      stroke: '#5F95FF',
+    },
+    label: {
+      textWrap: {
+        ellipsis: true,
+        width: -10,
+      },
+      textAnchor: 'middle',
+      textVerticalAnchor: 'middle',
+      refX: '50%',
+      refY: '50%',
+      fontSize: 12,
+    },
+    buttonGroup: {
+      refX: '100%',
+      refY: '50%',
+    },
+    button: {
+      fill: '#5F95FF',
+      stroke: 'none',
+      x: -10,
+      y: -10,
+      height: 20,
+      width: 30,
+      rx: 10,
+      ry: 10,
+      cursor: 'pointer',
+      event: 'node:collapse',
+    },
+    buttonSign: {
+      refX: 5,
+      refY: -5,
+      stroke: '#FFFFFF',
+      strokeWidth: 1.6,
+    },
+  },
+})
+
+// 定义边
+class TreeEdge extends Shape.Edge {
+  isHidden() {
+    const node = this.getTargetNode()
+    return !node || !node.isVisible()
+  }
+}
+
+TreeEdge.config({
+  zIndex: 1,
+  attrs: {
+    line: {
+      stroke: '#A2B1C3',
+      strokeWidth: 1,
+      targetMarker: null,
+    },
+  },
+})
+
+// 注册
+Node.registry.register('tree-node', TreeNode, true)
+Edge.registry.register('tree-edge', TreeEdge, true)
 
 export default {
   name: 'AntvPage',
@@ -474,6 +622,23 @@ export default {
           this.visible = true
         }
       })
+
+      graph.on('node:collapse', ({ node }) => {
+        node.toggleCollapse()
+        const collapsed = node.isCollapsed()
+        const run = pre => {
+          const succ = graph.getSuccessors(pre, { distance: 1 })
+          if (succ) {
+            succ.forEach(node => {
+              node.toggleVisible(!collapsed)
+              if (!node.isCollapsed()) {
+                run(node)
+              }
+            })
+          }
+        }
+        run(node)
+      })
     },
     // 初始化节点
     initNode() {
@@ -563,6 +728,7 @@ export default {
           inherit: 'rect',
           width: 120,
           height: 40,
+          leaf: false,
           attrs: {
             label: {
               text: '方形节点',
@@ -708,9 +874,27 @@ export default {
           currentData.edges.push(x)
         }
       })
-      this.graphObj.fromJSON(currentData) // 渲染元素
+      // this.graphObj.fromJSON(currentData) // 渲染元素
+      // this.graphObj.zoomTo(0.5)
+      // this.graphObj.centerContent() // 居中显示
+      const nodes = currentData.nodes.map(({ leaf, ...metadata }) => {
+        console.log(leaf)
+        const node = new TreeNode(metadata)
+        if (leaf) {
+          node.toggleButtonVisibility(leaf === false)
+        }
+        return node
+      })
+      const edges = currentData.edges.map(
+        edge =>
+          new TreeEdge({
+            source: edge.source,
+            target: edge.target,
+          }),
+      )
+
+      this.graphObj.resetCells([...nodes, ...edges])
       this.graphObj.zoomTo(0.5)
-      this.graphObj.centerContent() // 居中显示
     },
     onLoadByDefaultData() {
       let currentData = {
@@ -724,9 +908,27 @@ export default {
           currentData.edges.push(x)
         }
       })
-      this.graphObj.fromJSON(currentData) // 渲染元素
+      // this.graphObj.fromJSON(currentData) // 渲染元素
+      // this.graphObj.zoomTo(0.5)
+      // this.graphObj.centerContent() // 居中显示
+      const nodes = currentData.nodes.map(({ leaf, ...metadata }) => {
+        console.log(leaf)
+        const node = new TreeNode(metadata)
+        if (leaf) {
+          node.toggleButtonVisibility(leaf === false)
+        }
+        return node
+      })
+      const edges = currentData.edges.map(
+        edge =>
+          new TreeEdge({
+            source: edge.source,
+            target: edge.target,
+          }),
+      )
+
+      this.graphObj.resetCells([...nodes, ...edges])
       this.graphObj.zoomTo(0.5)
-      this.graphObj.centerContent() // 居中显示
     },
     onConfirm() {
       this.currentNode.setAttrs({
