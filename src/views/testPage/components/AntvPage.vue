@@ -2,13 +2,27 @@
   <div class="app-content">
     <div class="btns">
       <div>
+        <ul>
+          <li>编辑模式：dbclick 编辑节点内容</li>
+          <li>非编辑模式：单击弹窗</li>
+        </ul>
+      </div>
+      <div>
+        <el-button type="primary" @click="onCheckJSON">查看JSON数据</el-button>
+      </div>
+      <div>
         <el-button type="primary" @click="onTriggerByLine(`blueArrow`)">蓝色+箭头</el-button>
         <el-button type="primary" @click="onTriggerByLine(`grayLarge`)">灰-粗</el-button>
         <el-button type="primary" @click="onTriggerByLine(`graySmall`)">灰-细</el-button>
       </div>
       <div>
-        编辑模式
-        <el-switch v-model="isEditMode" active-color="#13ce66" inactive-color="#ff4949"></el-switch>
+        <el-switch
+          v-model="isEditMode"
+          active-text="编辑模式"
+          inactive-text="查看模式"
+          active-color="#13ce66"
+          inactive-color="#ff4949"
+        ></el-switch>
       </div>
       <div>
         <el-button type="primary" @click="onTriggerIsEdgeWithArrow">带箭头线</el-button>
@@ -115,6 +129,10 @@
       </span> -->
     </el-dialog>
 
+    <el-drawer title="JSON数据" :visible.sync="visibleByJSON" size="800px" append-to-body>
+      <JsonEditorVue v-model="dataByJSON" class="jse-theme-dark" />
+    </el-drawer>
+
     <div class="side-part" id="stencil">side</div>
     <div id="container" ref="containerRef"></div>
   </div>
@@ -125,8 +143,14 @@ import { Clipboard, Graph, History, Keyboard, Selection, Shape, Snapline, Stenci
 
 import nodeData from './nodeData.js'
 
+import 'vanilla-jsoneditor/themes/jse-theme-dark.css'
+import JsonEditorVue from 'json-editor-vue'
+
 export default {
   name: 'AntvPage',
+  components: {
+    JsonEditorVue,
+  },
   data() {
     return {
       graphObj: null,
@@ -161,6 +185,9 @@ export default {
       },
       currentTitle: ``,
       lineType: ``,
+      visibleByJSON: false,
+      dataByJSON: ``,
+      collapsed: false,
     }
   },
   mounted() {
@@ -429,9 +456,9 @@ export default {
       graph.on('node:click', ({ e, x, y, node, view }) => {
         console.log('node:click', e, x, y, node, view)
         if (this.isEditMode) {
-          console.log(`编辑模式，单击节点，编辑数据`)
+          console.log(`%c------编辑模式，单击节点，没有操作------`, `color: gold; background: #333;`)
         } else {
-          console.log(`非编辑模式，单击节点，查看流程数据`)
+          console.log(`%c------非编辑模式，单击节点，编辑数据------`, `color: gold; background: #333;`)
           this.currentTitle = node.attrs.label.text
           this.handleOpenDialog(e)
         }
@@ -439,10 +466,13 @@ export default {
       // 测试双击编辑 attrs 的数据
       graph.on('node:dblclick', ({ e, x, y, node, view }) => {
         console.log('node:dblclick', e, x, y, node, view)
-        this.visible = true
-        this.currentNode = node
-        this.form.label = node.label
-        this.form.color = node.attrs.body.fill
+        if (this.isEditMode) {
+          console.log(`%c------编辑模式，dbclick 节点，编辑数据------`, `color: pink; background: #333;`)
+          this.currentNode = node
+          this.form.label = node.label
+          this.form.color = node.attrs.body.fill
+          this.visible = true
+        }
       })
     },
     // 初始化节点
@@ -741,6 +771,31 @@ export default {
     },
     onTriggerByLine(lineType) {
       this.lineType = lineType
+    },
+    onCheckJSON() {
+      // this.visibleByJSON = true
+      let cache = localStorage.getItem(`x6JSON`)
+      if (!cache) {
+        this.$message.error(`没有缓存数据，直接读取当前数据`)
+        this.dataByJSON = currentData
+        this.visibleByJSON = true
+        return
+      }
+      let jsonData = JSON.parse(cache)
+      let currentData = {
+        nodes: [],
+        edges: [],
+      }
+      console.log(currentData)
+      jsonData.forEach(x => {
+        if (x.shape !== 'edge') {
+          currentData.nodes.push(x)
+        } else {
+          currentData.edges.push(x)
+        }
+      })
+      this.dataByJSON = currentData
+      this.visibleByJSON = true
     },
   },
 }
