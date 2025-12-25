@@ -229,11 +229,134 @@ TreeNode.config({
   ],
   attrs: {
     body: {
+      rx: 4,
+      ry: 4,
       refWidth: '100%',
       refHeight: '100%',
       strokeWidth: 1,
-      fill: '#EFF4FF',
-      stroke: '#5F95FF',
+      fill: '#2590FF',
+      stroke: '#2590FF',
+    },
+    text: {
+      fontSize: 16,
+      fill: '#FFF',
+    },
+    label: {
+      textWrap: {
+        ellipsis: true,
+        width: -10,
+      },
+      textAnchor: 'middle',
+      textVerticalAnchor: 'middle',
+      refX: '50%',
+      refY: '50%',
+      fontSize: 12,
+    },
+    buttonGroup: {
+      refX: '100%',
+      refY: '50%',
+    },
+    button: {
+      fill: '#5F95FF',
+      stroke: 'none',
+      x: -10,
+      y: -10,
+      height: 20,
+      width: 30,
+      rx: 10,
+      ry: 10,
+      cursor: 'pointer',
+      event: 'node:collapse',
+    },
+    buttonSign: {
+      refX: 5,
+      refY: -5,
+      stroke: '#FFFFFF',
+      strokeWidth: 1.6,
+    },
+  },
+})
+
+class TreeNodeRound extends Node {
+  constructor(options) {
+    super(options)
+    this.toggleButtonVisibility(true)
+    this.toggleCollapse(true)
+  }
+
+  isCollapsed() {
+    return this.collapsed
+  }
+
+  toggleButtonVisibility(visible) {
+    this.attr('buttonGroup', {
+      display: visible ? 'block' : 'none',
+    })
+  }
+
+  toggleCollapse(collapsed) {
+    const target = collapsed == null ? !this.collapsed : collapsed
+    if (!target) {
+      this.attr('buttonSign', {
+        d: 'M 1 5 9 5 M 5 1 5 9',
+        strokeWidth: 1.6,
+      })
+    } else {
+      this.attr('buttonSign', {
+        d: 'M 2 5 8 5',
+        strokeWidth: 1.8,
+      })
+    }
+    this.collapsed = target
+  }
+}
+
+TreeNodeRound.config({
+  zIndex: 2,
+  markup: [
+    {
+      tagName: 'g',
+      selector: 'buttonGroup',
+      children: [
+        {
+          tagName: 'rect',
+          selector: 'button',
+          attrs: {
+            'pointer-events': 'visiblePainted',
+          },
+        },
+        {
+          tagName: 'path',
+          selector: 'buttonSign',
+          attrs: {
+            fill: 'none',
+            'pointer-events': 'none',
+          },
+        },
+      ],
+    },
+    {
+      tagName: 'rect',
+      selector: 'body',
+    },
+    {
+      tagName: 'text',
+      selector: 'label',
+    },
+  ],
+  attrs: {
+    body: {
+      rx: 100,
+      ry: 100,
+      refWidth: '100%',
+      refHeight: '100%',
+      strokeWidth: 1,
+      stroke: '#2590FF',
+      fill: '#1681F1',
+    },
+    text: {
+      fontSize: 16,
+      fill: '#FFF',
     },
     label: {
       textWrap: {
@@ -292,6 +415,7 @@ TreeEdge.config({
 
 // 注册
 Node.registry.register('tree-node', TreeNode, true)
+Node.registry.register('tree-node-round', TreeNodeRound, true)
 Edge.registry.register('tree-edge', TreeEdge, true)
 
 export default {
@@ -879,7 +1003,14 @@ export default {
       // this.graphObj.centerContent() // 居中显示
       const nodes = currentData.nodes.map(({ leaf, ...metadata }) => {
         console.log(leaf)
-        const node = new TreeNode(metadata)
+        console.log(metadata)
+        // const node = new TreeNode(metadata)
+        let node = null
+        if (metadata.shape === 'custom-circle') {
+          node = new TreeNodeRound(metadata)
+        } else {
+          node = new TreeNode(metadata)
+        }
         if (leaf) {
           node.toggleButtonVisibility(leaf === false)
         }
@@ -913,6 +1044,7 @@ export default {
       // this.graphObj.centerContent() // 居中显示
       const nodes = currentData.nodes.map(({ leaf, ...metadata }) => {
         console.log(leaf)
+        console.log({ metadata })
         const node = new TreeNode(metadata)
         if (leaf) {
           node.toggleButtonVisibility(leaf === false)
