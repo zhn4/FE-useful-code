@@ -255,25 +255,27 @@ TreeNode.config({
       fontSize: 12,
     },
     buttonGroup: {
-      refX: '100%',
-      refY: '50%',
+      refX: '50%',
+      refY: '115%',
     },
     button: {
-      fill: '#5F95FF',
-      stroke: 'none',
+      fill: 'rgba(255, 255, 255, 0.5)',
+      // stroke: 'none',
+      stroke: '#6584A4',
+      strokeWidth: 1,
       x: -10,
       y: -10,
       height: 20,
-      width: 30,
+      width: 20,
       rx: 10,
       ry: 10,
       cursor: 'pointer',
       event: 'node:collapse',
     },
     buttonSign: {
-      refX: 5,
+      refX: -5,
       refY: -5,
-      stroke: '#FFFFFF',
+      stroke: '#6584A4',
       strokeWidth: 1.6,
     },
   },
@@ -601,7 +603,7 @@ export default {
       },
       currentNode: null,
       isEdgeWithArrow: true, // 连接线是否带箭头
-      isEditMode: true, // 是否编辑模式
+      isEditMode: false, // 是否编辑模式
       dialogVisible: false,
       formByProcess: {
         prop01: `常规xx`,
@@ -1283,7 +1285,12 @@ export default {
         edges: [],
       }
       nodeData.forEach(x => {
-        if (x.shape !== 'edge') {
+        if (
+          x.shape !== 'edge' &&
+          x.shape !== 'tree-edge' &&
+          x.shape !== 'tree-edge-blue-arrow' &&
+          x.shape !== 'tree-edge-gray-large'
+        ) {
           currentData.nodes.push(x)
         } else {
           currentData.edges.push(x)
