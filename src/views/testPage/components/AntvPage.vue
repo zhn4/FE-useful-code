@@ -163,8 +163,8 @@ import JsonEditorVue from 'json-editor-vue'
 class TreeNode extends Node {
   constructor(options) {
     super(options)
-    this.toggleButtonVisibility(true)
-    this.toggleCollapse(true)
+    this.toggleButtonVisibility(false)
+    this.toggleCollapse(false)
   }
 
   isCollapsed() {
@@ -173,8 +173,7 @@ class TreeNode extends Node {
 
   toggleButtonVisibility(visible) {
     this.attr('buttonGroup', {
-      // display: visible ? 'block' : 'none',
-      display: 'block',
+      display: visible ? 'block' : 'none',
     })
   }
 
@@ -256,7 +255,7 @@ TreeNode.config({
     },
     buttonGroup: {
       refX: '50%',
-      refY: '115%',
+      refY: '128%',
     },
     button: {
       fill: 'rgba(255, 255, 255, 0.5)',
@@ -284,8 +283,8 @@ TreeNode.config({
 class TreeNodeRound extends Node {
   constructor(options) {
     super(options)
-    this.toggleButtonVisibility(true)
-    this.toggleCollapse(true)
+    this.toggleButtonVisibility(false)
+    this.toggleCollapse(false)
   }
 
   isCollapsed() {
