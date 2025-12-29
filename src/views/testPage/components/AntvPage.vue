@@ -656,6 +656,7 @@ export default {
         container: document.getElementById('container'),
         width: containerWidth,
         height: containerHeight,
+        autoResize: true, // 画布自动缩放
         background: {
           color: '#F2F7FA', // 设置画布背景颜色
         },
