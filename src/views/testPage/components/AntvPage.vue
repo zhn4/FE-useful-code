@@ -178,7 +178,6 @@ class TreeNode extends Node {
   }
 
   toggleCollapse(collapsed) {
-    // const target = collapsed == null ? !this.collapsed : collapsed
     const target = collapsed == null ? !this.collapsed : collapsed
     if (!target) {
       this.attr('buttonSign', {
@@ -401,8 +400,8 @@ TreeNodeRound.config({
 class TreeNodeSmall extends Node {
   constructor(options) {
     super(options)
-    this.toggleButtonVisibility(true)
-    this.toggleCollapse(true)
+    this.toggleButtonVisibility(false)
+    this.toggleCollapse(false)
   }
 
   isCollapsed() {
@@ -936,6 +935,10 @@ export default {
           console.log(`%c------编辑模式，单击节点，没有操作------`, `color: gold; background: #333;`)
         } else {
           console.log(`%c------非编辑模式，单击节点，编辑数据------`, `color: gold; background: #333;`)
+          console.log(node)
+          if (node.shape === 'custom-rect') {
+            return
+          }
           this.currentTitle = node.attrs.label.text
           this.handleOpenDialog(e)
         }
