@@ -145,11 +145,11 @@ import {
   History,
   Keyboard,
   Selection,
-  Shape,
+  // Shape,
   Snapline,
   Stencil,
   Transform,
-  Scroller,
+  // Scroller,
   Node,
   Edge,
 } from '@antv/x6'
@@ -157,425 +157,17 @@ import {
 import nodeData from './nodeData.js'
 
 import 'vanilla-jsoneditor/themes/jse-theme-dark.css'
+
 import JsonEditorVue from 'json-editor-vue'
 
-// 定义节点
-class TreeNode extends Node {
-  constructor(options) {
-    super(options)
-    this.toggleButtonVisibility(false)
-    this.toggleCollapse(false)
-  }
-
-  isCollapsed() {
-    return this.collapsed
-  }
-
-  toggleButtonVisibility(visible) {
-    this.attr('buttonGroup', {
-      display: visible ? 'block' : 'none',
-    })
-  }
-
-  toggleCollapse(collapsed) {
-    const target = collapsed == null ? !this.collapsed : collapsed
-    if (!target) {
-      this.attr('buttonSign', {
-        d: 'M 1 5 9 5 M 5 1 5 9',
-        strokeWidth: 1.6,
-      })
-    } else {
-      this.attr('buttonSign', {
-        d: 'M 2 5 8 5',
-        strokeWidth: 1.8,
-      })
-    }
-    this.collapsed = target
-  }
-}
-
-TreeNode.config({
-  zIndex: 2,
-  markup: [
-    {
-      tagName: 'g',
-      selector: 'buttonGroup',
-      children: [
-        {
-          tagName: 'rect',
-          selector: 'button',
-          attrs: {
-            'pointer-events': 'visiblePainted',
-          },
-        },
-        {
-          tagName: 'path',
-          selector: 'buttonSign',
-          attrs: {
-            fill: 'none',
-            'pointer-events': 'none',
-          },
-        },
-      ],
-    },
-    {
-      tagName: 'rect',
-      selector: 'body',
-    },
-    {
-      tagName: 'text',
-      selector: 'label',
-    },
-  ],
-  attrs: {
-    body: {
-      rx: 4,
-      ry: 4,
-      refWidth: '100%',
-      refHeight: '100%',
-      strokeWidth: 1,
-      fill: '#2590FF',
-      stroke: '#2590FF',
-    },
-    text: {
-      fontSize: 16,
-      fill: '#FFF',
-    },
-    label: {
-      textWrap: {
-        ellipsis: true,
-        width: -10,
-      },
-      textAnchor: 'middle',
-      textVerticalAnchor: 'middle',
-      refX: '50%',
-      refY: '50%',
-      fontSize: 12,
-    },
-    buttonGroup: {
-      refX: '50%',
-      refY: '128%',
-    },
-    button: {
-      fill: 'rgba(255, 255, 255, 0.5)',
-      // stroke: 'none',
-      stroke: '#6584A4',
-      strokeWidth: 1,
-      x: -10,
-      y: -10,
-      height: 20,
-      width: 20,
-      rx: 10,
-      ry: 10,
-      cursor: 'pointer',
-      event: 'node:collapse',
-    },
-    buttonSign: {
-      refX: -5,
-      refY: -5,
-      stroke: '#6584A4',
-      strokeWidth: 1.6,
-    },
-  },
-})
-
-class TreeNodeRound extends Node {
-  constructor(options) {
-    super(options)
-    this.toggleButtonVisibility(false)
-    this.toggleCollapse(false)
-  }
-
-  isCollapsed() {
-    return this.collapsed
-  }
-
-  toggleButtonVisibility(visible) {
-    this.attr('buttonGroup', {
-      display: visible ? 'block' : 'none',
-    })
-  }
-
-  toggleCollapse(collapsed) {
-    const target = collapsed == null ? !this.collapsed : collapsed
-    if (!target) {
-      this.attr('buttonSign', {
-        d: 'M 1 5 9 5 M 5 1 5 9',
-        strokeWidth: 1.6,
-      })
-    } else {
-      this.attr('buttonSign', {
-        d: 'M 2 5 8 5',
-        strokeWidth: 1.8,
-      })
-    }
-    this.collapsed = target
-  }
-}
-
-TreeNodeRound.config({
-  zIndex: 2,
-  markup: [
-    {
-      tagName: 'g',
-      selector: 'buttonGroup',
-      children: [
-        {
-          tagName: 'rect',
-          selector: 'button',
-          attrs: {
-            'pointer-events': 'visiblePainted',
-          },
-        },
-        {
-          tagName: 'path',
-          selector: 'buttonSign',
-          attrs: {
-            fill: 'none',
-            'pointer-events': 'none',
-          },
-        },
-      ],
-    },
-    {
-      tagName: 'rect',
-      selector: 'body',
-    },
-    {
-      tagName: 'text',
-      selector: 'label',
-    },
-  ],
-  attrs: {
-    body: {
-      rx: 100,
-      ry: 100,
-      refWidth: '100%',
-      refHeight: '100%',
-      strokeWidth: 1,
-      stroke: '#2590FF',
-      fill: '#1681F1',
-    },
-    text: {
-      fontSize: 16,
-      fill: '#FFF',
-    },
-    label: {
-      textWrap: {
-        ellipsis: true,
-        width: -10,
-      },
-      textAnchor: 'middle',
-      textVerticalAnchor: 'middle',
-      refX: '50%',
-      refY: '50%',
-      fontSize: 12,
-    },
-    // TODO: 圆形节点，暂时不用折叠
-    // buttonGroup: {
-    //   refX: '100%',
-    //   refY: '50%',
-    // },
-    // button: {
-    //   fill: '#5F95FF',
-    //   stroke: 'none',
-    //   x: -10,
-    //   y: -10,
-    //   height: 20,
-    //   width: 30,
-    //   rx: 10,
-    //   ry: 10,
-    //   cursor: 'pointer',
-    //   event: 'node:collapse',
-    // },
-    // buttonSign: {
-    //   refX: 5,
-    //   refY: -5,
-    //   stroke: '#FFFFFF',
-    //   strokeWidth: 1.6,
-    // },
-  },
-})
-
-class TreeNodeSmall extends Node {
-  constructor(options) {
-    super(options)
-    this.toggleButtonVisibility(false)
-    this.toggleCollapse(false)
-  }
-
-  isCollapsed() {
-    return this.collapsed
-  }
-
-  toggleButtonVisibility(visible) {
-    this.attr('buttonGroup', {
-      display: visible ? 'block' : 'none',
-    })
-  }
-
-  toggleCollapse(collapsed) {
-    const target = collapsed == null ? !this.collapsed : collapsed
-    if (!target) {
-      this.attr('buttonSign', {
-        d: 'M 1 5 9 5 M 5 1 5 9',
-        strokeWidth: 1.6,
-      })
-    } else {
-      this.attr('buttonSign', {
-        d: 'M 2 5 8 5',
-        strokeWidth: 1.8,
-      })
-    }
-    this.collapsed = target
-  }
-}
-
-TreeNodeSmall.config({
-  zIndex: 2,
-  markup: [
-    {
-      tagName: 'g',
-      selector: 'buttonGroup',
-      children: [
-        {
-          tagName: 'rect',
-          selector: 'button',
-          attrs: {
-            'pointer-events': 'visiblePainted',
-          },
-        },
-        {
-          tagName: 'path',
-          selector: 'buttonSign',
-          attrs: {
-            fill: 'none',
-            'pointer-events': 'none',
-          },
-        },
-      ],
-    },
-    {
-      tagName: 'rect',
-      selector: 'body',
-    },
-    {
-      tagName: 'text',
-      selector: 'label',
-    },
-  ],
-  attrs: {
-    body: {
-      rx: 4,
-      ry: 4,
-      refWidth: '100%',
-      refHeight: '100%',
-      strokeWidth: 1,
-      fill: '#2590FF',
-      stroke: '#2590FF',
-    },
-    text: {
-      fontSize: 16,
-      fill: '#FFF',
-    },
-    label: {
-      textWrap: {
-        ellipsis: true,
-        width: -10,
-      },
-      textAnchor: 'middle',
-      textVerticalAnchor: 'middle',
-      refX: '50%',
-      refY: '50%',
-      fontSize: 12,
-    },
-    // TODO: 方形长节点，暂时不用折叠
-    // buttonGroup: {
-    //   refX: '100%',
-    //   refY: '50%',
-    // },
-    // button: {
-    //   fill: '#5F95FF',
-    //   stroke: 'none',
-    //   x: -10,
-    //   y: -10,
-    //   height: 20,
-    //   width: 30,
-    //   rx: 10,
-    //   ry: 10,
-    //   cursor: 'pointer',
-    //   event: 'node:collapse',
-    // },
-    // buttonSign: {
-    //   refX: 5,
-    //   refY: -5,
-    //   stroke: '#FFFFFF',
-    //   strokeWidth: 1.6,
-    // },
-  },
-})
-
-// 定义边
-class TreeEdge extends Shape.Edge {
-  isHidden() {
-    const node = this.getTargetNode()
-    return !node || !node.isVisible()
-  }
-}
-
-TreeEdge.config({
-  zIndex: 1,
-  attrs: {
-    line: {
-      stroke: '#A2B1C3',
-      strokeWidth: 1,
-      targetMarker: null,
-    },
-  },
-})
-
-// TODO: line1
-class TreeEdgeBlueArrow extends Shape.Edge {
-  isHidden() {
-    const node = this.getTargetNode()
-    return !node || !node.isVisible()
-  }
-}
-
-TreeEdgeBlueArrow.config({
-  zIndex: 1,
-  attrs: {
-    line: {
-      stroke: '#2590FF',
-      strokeWidth: 4,
-      targetMarker: {
-        name: 'block', // 箭头样式为实心块
-        width: 6,
-        height: 12,
-      },
-    },
-  },
-})
-
-// TODO: line2
-class TreeEdgeGrayLarge extends Shape.Edge {
-  isHidden() {
-    const node = this.getTargetNode()
-    return !node || !node.isVisible()
-  }
-}
-
-TreeEdgeGrayLarge.config({
-  zIndex: 1,
-  attrs: {
-    line: {
-      customMark: `grayLarge`,
-      stroke: '#6584A4',
-      strokeWidth: 2,
-      targetMarker: null,
-    },
-  },
-})
+import {
+  TreeNode,
+  TreeNodeRound,
+  TreeNodeSmall,
+  TreeEdge,
+  TreeEdgeBlueArrow,
+  TreeEdgeGrayLarge,
+} from '../config/customNode.js'
 
 // 注册
 Node.registry.register('tree-node', TreeNode, true)
@@ -965,7 +557,7 @@ export default {
         const collapsed = node.isCollapsed()
         const run = pre => {
           const succ = graph.getSuccessors(pre, { distance: 1 })
-          console.log('succ', succ)
+          // console.log('succ', succ)
           if (succ) {
             succ
               .filter(x => x.shape === 'custom-rect-small')
@@ -1110,8 +702,23 @@ export default {
             },
             body: {
               strokeWidth: 1,
-              stroke: '#2590FF',
-              fill: '#1681F1',
+              stroke: 'transparent',
+              // fill: '#1681F1',
+              fill: {
+                // 预设渐变填充
+                type: 'radialGradient', // 径向渐变更适合圆形
+                attrs: {
+                  cx: '30%',
+                  cy: '25%',
+                  r: '75%',
+                  fx: '30%',
+                  fy: '25%',
+                },
+                stops: [
+                  { offset: '0%', color: '#F2FAFF' },
+                  { offset: '100%', color: '#1681F1' },
+                ],
+              },
             },
             text: {
               fontSize: 16,
@@ -1154,12 +761,12 @@ export default {
     // 初始化节点工具栏
     initStencil(graph) {
       const stencil = new Stencil({
-        title: '流程图',
+        title: '工具栏',
         target: graph,
-        stencilGraphWidth: 200,
-        stencilGraphHeight: 800,
+        stencilGraphWidth: 260,
+        stencilGraphHeight: 300,
         // stencilGraphOptions: { panning: true },
-        collapsable: true,
+        collapsable: false,
         groups: [
           {
             title: '基础流程图',
@@ -1209,85 +816,18 @@ export default {
     onLoadBylocalStorage() {
       let cache = localStorage.getItem(`x6JSON`)
       let jsonData = JSON.parse(cache)
-      let currentData = {
-        nodes: [],
-        edges: [],
-      }
-      jsonData.forEach(x => {
-        if (
-          x.shape !== 'edge' &&
-          x.shape !== 'tree-edge' &&
-          x.shape !== 'tree-edge-blue-arrow' &&
-          x.shape !== 'tree-edge-gray-large'
-        ) {
-          currentData.nodes.push(x)
-        } else {
-          currentData.edges.push(x)
-        }
-      })
-      if (this.isEditMode) {
-        this.graphObj.fromJSON(currentData) // 渲染元素
-        this.graphObj.zoomTo(0.5)
-        this.graphObj.centerContent() // 居中显示
-        return
-      }
-      const nodes = currentData.nodes.map(({ leaf, ...metadata }) => {
-        console.log(`查看节点数据`)
-        console.log(leaf)
-        console.log(metadata)
-        console.log(metadata.shape)
-        // const node = new TreeNode(metadata)
-        let node = null
-        if (metadata.shape === 'custom-circle') {
-          node = new TreeNodeRound(metadata)
-        } else if (metadata.shape === 'custom-rect-small') {
-          node = new TreeNodeSmall(metadata)
-        } else if (metadata.shape === 'custom-rect') {
-          node = new TreeNode(metadata)
-        }
-        if (leaf) {
-          node.toggleButtonVisibility(leaf === false)
-        }
-        return node
-      })
-      console.log('----------')
-      const edges = currentData.edges.map(edge => {
-        console.log(`edge`)
-        console.log(edge)
-        let curEdge = new TreeEdge({
-          source: edge.source,
-          target: edge.target,
-        })
-        if (edge.shape) {
-          if (edge.shape === `tree-edge-blue-arrow`) {
-            console.log(`%c蓝线`, `color: blue;`)
-            curEdge = new TreeEdgeBlueArrow({
-              source: edge.source,
-              target: edge.target,
-            })
-          } else if (edge.shape === `tree-edge-gray-large`) {
-            console.log(`%c灰色粗线`, `color: gray;`)
-            curEdge = new TreeEdgeGrayLarge({
-              source: edge.source,
-              target: edge.target,
-            })
-          } else if (edge.shape === `graySmall`) {
-            // TODO: 不处理
-          }
-        }
-        return curEdge
-      })
-
-      this.graphObj.resetCells([...nodes, ...edges])
-      this.graphObj.zoomTo(0.5)
-      this.graphObj.centerContent() // 居中显示
+      this.handleJSONdata(jsonData)
     },
     onLoadByDefaultData() {
+      this.handleJSONdata(nodeData)
+    },
+    handleJSONdata(curNodeData) {
       let currentData = {
         nodes: [],
         edges: [],
       }
-      nodeData.forEach(x => {
+      // 节点、线，分类
+      curNodeData.forEach(x => {
         if (
           x.shape !== 'edge' &&
           x.shape !== 'tree-edge' &&
@@ -1299,17 +839,19 @@ export default {
           currentData.edges.push(x)
         }
       })
+      // 编辑模式，直接加载数据，不需要折叠展开功能
       if (this.isEditMode) {
         this.graphObj.fromJSON(currentData) // 渲染元素
-        this.graphObj.zoomTo(0.5)
+        this.graphObj.zoomTo(0.5) // 缩放0.5倍
         this.graphObj.centerContent() // 居中显示
         return
       }
+
       const nodes = currentData.nodes.map(({ leaf, ...metadata }) => {
-        console.log(`查看节点数据`)
-        console.log(leaf)
-        console.log(metadata)
-        console.log(metadata.shape)
+        // console.log(`查看节点数据`)
+        // console.log(leaf)
+        // console.log(metadata)
+        // console.log(metadata.shape)
         // const node = new TreeNode(metadata)
         let node = null
         if (metadata.shape === 'custom-circle') {
@@ -1326,31 +868,28 @@ export default {
       })
       console.log('----------')
       const edges = currentData.edges.map(edge => {
-        console.log(`edge`)
-        console.log(edge)
+        // console.log(`edge`)
+        // console.log(edge)
         let curEdge = new TreeEdge({
           source: edge.source,
           target: edge.target,
         })
         if (edge.shape) {
           if (edge.shape === `tree-edge-blue-arrow`) {
-            console.log(`%c蓝线`, `color: blue;`)
             curEdge = new TreeEdgeBlueArrow({
               source: edge.source,
               target: edge.target,
             })
           } else if (edge.shape === `tree-edge-gray-large`) {
-            console.log(`%c灰色粗线`, `color: gray;`)
             curEdge = new TreeEdgeGrayLarge({
               source: edge.source,
               target: edge.target,
             })
-          } else if (edge.shape === `graySmall`) {
-            // TODO: 不处理
           }
         }
         return curEdge
       })
+      console.log(curNodeData, 'curNodeData==================================')
 
       this.graphObj.resetCells([...nodes, ...edges])
       this.graphObj.zoomTo(0.5)
@@ -1440,7 +979,7 @@ export default {
 }
 
 .side-part {
-  width: 200px;
+  width: 260px;
   height: 100%;
   border-right: 1px solid #ccc;
   padding: 10px;

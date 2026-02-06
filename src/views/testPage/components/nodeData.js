@@ -1,146 +1,119 @@
 const nodeData = [
   {
-    shape: 'edge',
+    shape: 'tree-edge-blue-arrow',
     attrs: {
       line: {
-        stroke: '#6584A4',
-        strokeWidth: 1,
-        targetMarker: null,
+        stroke: '#2590FF',
+        targetMarker: {
+          width: 6,
+        },
+        customMark: 'blueArrow',
+      },
+      test123: {
+        0: 'b',
+        1: 'l',
+        2: 'u',
+        3: 'e',
+        4: 'A',
+        5: 'r',
+        6: 'r',
+        7: 'o',
+        8: 'w',
       },
     },
-    id: 'd9df3cb6-ea5b-420d-a407-9d6a9cf7516a',
     zIndex: 0,
+    id: '9b2d077d-278e-44ba-8b73-49801f676e3c',
     source: {
-      cell: '4f006987-22fb-47b4-8d90-808f12b0d3c6',
-      port: '8e160aec-efa1-44e8-a8c6-e9ca18e6870b',
+      cell: '0d682fea-c43c-4586-a2c7-246f381f321b',
+      port: '3b022a0a-0975-49fd-bc47-831c1d7ab99b',
     },
     target: {
-      cell: '2633c965-a7f9-442e-91b1-8799fba0dc54',
-      port: 'f2fb29c9-b112-4397-b6a7-8cea35f45814',
+      cell: 'e4086101-0294-4c3b-aa38-4dc24a8d476e',
+      port: 'b8ff92d5-e8f7-4d42-b319-0bfb6853767c',
     },
   },
   {
-    shape: 'edge',
+    shape: 'tree-edge-blue-arrow',
     attrs: {
       line: {
-        stroke: '#6584A4',
-        strokeWidth: 1,
-        targetMarker: null,
+        stroke: '#2590FF',
+        targetMarker: {
+          width: 6,
+        },
+        customMark: 'blueArrow',
+      },
+      test123: {
+        0: 'b',
+        1: 'l',
+        2: 'u',
+        3: 'e',
+        4: 'A',
+        5: 'r',
+        6: 'r',
+        7: 'o',
+        8: 'w',
       },
     },
-    id: 'ecb8dbb9-0237-4533-934e-ab6dabd8cafa',
     zIndex: 0,
+    id: 'a3745964-a50e-478d-b2eb-dbe64222819d',
     source: {
-      cell: '4f006987-22fb-47b4-8d90-808f12b0d3c6',
-      port: '8e160aec-efa1-44e8-a8c6-e9ca18e6870b',
+      cell: 'e4086101-0294-4c3b-aa38-4dc24a8d476e',
+      port: '548d4bbf-0bb4-4639-9506-3fe1a83ba096',
     },
     target: {
-      cell: '916046dd-a6a4-4ea2-a11e-1a931c94aa30',
-      port: 'f2fb29c9-b112-4397-b6a7-8cea35f45814',
+      cell: '4bc158ed-16b1-4030-ba44-57bbecb37c06',
+      port: '3824f4bf-9ca2-4f84-819d-e9935a64f8b9',
     },
   },
   {
-    shape: 'edge',
+    shape: 'tree-edge-blue-arrow',
     attrs: {
       line: {
-        stroke: '#6584A4',
-        targetMarker: null,
+        stroke: '#2590FF',
+        targetMarker: {
+          width: 6,
+        },
+        customMark: 'blueArrow',
+      },
+      test123: {
+        0: 'b',
+        1: 'l',
+        2: 'u',
+        3: 'e',
+        4: 'A',
+        5: 'r',
+        6: 'r',
+        7: 'o',
+        8: 'w',
       },
     },
-    id: 'ccdc2d7f-e406-4a52-bbf2-57fd2f58f7c9',
     zIndex: 0,
+    id: '97735838-8d8f-474e-bd5b-0aac95cdfdb2',
     source: {
-      cell: '4f006987-22fb-47b4-8d90-808f12b0d3c6',
-      port: '349ee74a-1c7a-4b89-b89d-dfb61408b899',
+      cell: 'e4086101-0294-4c3b-aa38-4dc24a8d476e',
+      port: '548d4bbf-0bb4-4639-9506-3fe1a83ba096',
     },
     target: {
-      cell: 'd3a528bf-b046-489d-8517-5429cd97df23',
-      port: 'a64be19a-0963-46aa-a710-fe4f6f11fc56',
-    },
-  },
-  {
-    shape: 'edge',
-    attrs: {
-      line: {
-        stroke: '#6584A4',
-        strokeWidth: 1,
-        targetMarker: null,
-      },
-    },
-    id: 'c34a635b-8e80-42d3-8db7-4012842c915b',
-    zIndex: 0,
-    source: {
-      cell: 'd3a528bf-b046-489d-8517-5429cd97df23',
-      port: '8e160aec-efa1-44e8-a8c6-e9ca18e6870b',
-    },
-    target: {
-      cell: 'a09a98f7-181c-4ff6-b43f-2a584f11edc7',
-      port: 'f2fb29c9-b112-4397-b6a7-8cea35f45814',
-    },
-  },
-  {
-    shape: 'edge',
-    attrs: {
-      line: {
-        stroke: '#6584A4',
-        strokeWidth: 1,
-        targetMarker: null,
-      },
-    },
-    id: '9872b025-f8c5-4312-98a1-7242ddb18abb',
-    zIndex: 0,
-    source: {
-      cell: 'd3a528bf-b046-489d-8517-5429cd97df23',
-      port: '8e160aec-efa1-44e8-a8c6-e9ca18e6870b',
-    },
-    target: {
-      cell: 'eb8909ae-4110-41fe-8495-509543b89441',
-      port: 'f2fb29c9-b112-4397-b6a7-8cea35f45814',
-    },
-  },
-  {
-    shape: 'edge',
-    attrs: {
-      line: {
-        stroke: '#6584A4',
-        strokeWidth: 1,
-        targetMarker: null,
-      },
-    },
-    id: '51bcf73e-421f-4cff-8fe7-1ee343253538',
-    zIndex: 0,
-    source: {
-      cell: 'd3a528bf-b046-489d-8517-5429cd97df23',
-      port: '8e160aec-efa1-44e8-a8c6-e9ca18e6870b',
-    },
-    target: {
-      cell: 'f6824920-6556-4c5f-8e5a-16d7a5eb51d1',
-      port: 'f2fb29c9-b112-4397-b6a7-8cea35f45814',
+      cell: '32f44a6b-d1c5-4add-ae53-b0839d4ddeda',
+      port: '3824f4bf-9ca2-4f84-819d-e9935a64f8b9',
     },
   },
   {
     position: {
-      x: -760,
-      y: -520,
+      x: -1190,
+      y: -910,
     },
     size: {
-      width: 128,
-      height: 20,
+      width: 120,
+      height: 120,
     },
     attrs: {
       text: {
-        text: '方形细长节点',
-      },
-      buttonGroup: {
-        display: 'block',
-      },
-      buttonSign: {
-        strokeWidth: 1.8,
-        d: 'M 2 5 8 5',
+        text: '圆形节点',
       },
     },
-    visible: false,
-    shape: 'custom-rect-small',
+    visible: true,
+    shape: 'custom-circle',
     ports: {
       groups: {
         top: {
@@ -207,41 +180,143 @@ const nodeData = [
       items: [
         {
           group: 'top',
-          id: 'c2b34b10-a739-47d2-9168-256b7c7bfab9',
+          id: '9dcaa9b1-308c-495f-b88c-4bde60e7cca0',
         },
         {
           group: 'right',
-          id: '2ea0ec2f-331e-48fe-b651-3dbe25978b32',
+          id: '3b022a0a-0975-49fd-bc47-831c1d7ab99b',
         },
         {
           group: 'bottom',
-          id: '438cc2b0-2349-4ec1-a02f-6fe7237519e2',
+          id: 'aa81d4b0-a585-4bb1-ad9b-9e95f696af01',
         },
         {
           group: 'left',
-          id: '383bbb27-344f-4d1d-ad8f-dd304682e24f',
+          id: '6a641126-b405-46bc-a15d-2a761b4b8b1d',
         },
       ],
     },
-    id: '7778f1b0-3b72-4ece-acc3-0d72ab1f7135',
+    id: '0d682fea-c43c-4586-a2c7-246f381f321b',
+    zIndex: 1,
+  },
+  {
+    position: {
+      x: -909,
+      y: -870,
+    },
+    size: {
+      width: 120,
+      height: 40,
+    },
+    attrs: {
+      text: {
+        text: '方形节点',
+      },
+    },
+    visible: true,
+    shape: 'custom-rect',
+    leaf: false,
+    ports: {
+      groups: {
+        top: {
+          position: 'top',
+          attrs: {
+            circle: {
+              r: 4,
+              magnet: true,
+              stroke: '#5F95FF',
+              strokeWidth: 1,
+              fill: '#fff',
+              style: {
+                visibility: 'hidden',
+              },
+            },
+          },
+        },
+        right: {
+          position: 'right',
+          attrs: {
+            circle: {
+              r: 4,
+              magnet: true,
+              stroke: '#5F95FF',
+              strokeWidth: 1,
+              fill: '#fff',
+              style: {
+                visibility: 'hidden',
+              },
+            },
+          },
+        },
+        bottom: {
+          position: 'bottom',
+          attrs: {
+            circle: {
+              r: 4,
+              magnet: true,
+              stroke: '#5F95FF',
+              strokeWidth: 1,
+              fill: '#fff',
+              style: {
+                visibility: 'hidden',
+              },
+            },
+          },
+        },
+        left: {
+          position: 'left',
+          attrs: {
+            circle: {
+              r: 4,
+              magnet: true,
+              stroke: '#5F95FF',
+              strokeWidth: 1,
+              fill: '#fff',
+              style: {
+                visibility: 'hidden',
+              },
+            },
+          },
+        },
+      },
+      items: [
+        {
+          group: 'top',
+          id: '6d0089a3-1740-4977-bbce-194c6fe9e00c',
+        },
+        {
+          group: 'right',
+          id: '503115df-25e8-4744-b7a6-789b548bcfda',
+        },
+        {
+          group: 'bottom',
+          id: '548d4bbf-0bb4-4639-9506-3fe1a83ba096',
+        },
+        {
+          group: 'left',
+          id: 'b8ff92d5-e8f7-4d42-b319-0bfb6853767c',
+        },
+      ],
+    },
+    id: 'e4086101-0294-4c3b-aa38-4dc24a8d476e',
     zIndex: 2,
   },
   {
     position: {
-      x: -700,
-      y: -490,
+      x: -840,
+      y: -760,
     },
     size: {
-      width: 120,
-      height: 40,
+      width: 128,
+      height: 20,
     },
     attrs: {
       text: {
-        text: '方形节点',
+        text: '方形细长节点',
       },
     },
     visible: true,
-    shape: 'custom-rect',
+    shape: 'custom-rect-small',
     ports: {
       groups: {
         top: {
@@ -308,29 +383,29 @@ const nodeData = [
       items: [
         {
           group: 'top',
-          id: '904f842d-3136-4ab9-acd3-190ce7a8b4e0',
+          id: '62fd605d-b922-412b-8185-f18b326dd582',
         },
         {
           group: 'right',
-          id: '349ee74a-1c7a-4b89-b89d-dfb61408b899',
+          id: 'c393c1a0-1f1b-4b6c-a4ae-78c0edc8d8a4',
         },
         {
           group: 'bottom',
-          id: '8e160aec-efa1-44e8-a8c6-e9ca18e6870b',
+          id: 'fe96e5e0-b9a4-432a-a617-c65bdcae49b1',
         },
         {
           group: 'left',
-          id: 'a64be19a-0963-46aa-a710-fe4f6f11fc56',
+          id: '3824f4bf-9ca2-4f84-819d-e9935a64f8b9',
         },
       ],
     },
-    id: '4f006987-22fb-47b4-8d90-808f12b0d3c6',
+    id: '4bc158ed-16b1-4030-ba44-57bbecb37c06',
     zIndex: 3,
   },
   {
     position: {
-      x: -602,
-      y: -399,
+      x: -840,
+      y: -674,
     },
     size: {
       width: 128,
@@ -409,529 +484,24 @@ const nodeData = [
       items: [
         {
           group: 'top',
-          id: '4b9a6562-5dab-483d-ad3a-6da043302ae6',
+          id: '62fd605d-b922-412b-8185-f18b326dd582',
         },
         {
           group: 'right',
-          id: '9b57dd06-650c-4d66-afdc-5ca6f4ac35a2',
+          id: 'c393c1a0-1f1b-4b6c-a4ae-78c0edc8d8a4',
         },
         {
           group: 'bottom',
-          id: '0450858e-ef75-4017-b3c5-5a65ee9a12e9',
+          id: 'fe96e5e0-b9a4-432a-a617-c65bdcae49b1',
         },
         {
           group: 'left',
-          id: 'f2fb29c9-b112-4397-b6a7-8cea35f45814',
+          id: '3824f4bf-9ca2-4f84-819d-e9935a64f8b9',
         },
       ],
     },
-    id: '2633c965-a7f9-442e-91b1-8799fba0dc54',
+    id: '32f44a6b-d1c5-4add-ae53-b0839d4ddeda',
     zIndex: 4,
-  },
-  {
-    position: {
-      x: -602,
-      y: -344,
-    },
-    size: {
-      width: 128,
-      height: 20,
-    },
-    attrs: {
-      text: {
-        text: '方形细长节点',
-      },
-    },
-    visible: true,
-    shape: 'custom-rect-small',
-    ports: {
-      groups: {
-        top: {
-          position: 'top',
-          attrs: {
-            circle: {
-              r: 4,
-              magnet: true,
-              stroke: '#5F95FF',
-              strokeWidth: 1,
-              fill: '#fff',
-              style: {
-                visibility: 'hidden',
-              },
-            },
-          },
-        },
-        right: {
-          position: 'right',
-          attrs: {
-            circle: {
-              r: 4,
-              magnet: true,
-              stroke: '#5F95FF',
-              strokeWidth: 1,
-              fill: '#fff',
-              style: {
-                visibility: 'hidden',
-              },
-            },
-          },
-        },
-        bottom: {
-          position: 'bottom',
-          attrs: {
-            circle: {
-              r: 4,
-              magnet: true,
-              stroke: '#5F95FF',
-              strokeWidth: 1,
-              fill: '#fff',
-              style: {
-                visibility: 'hidden',
-              },
-            },
-          },
-        },
-        left: {
-          position: 'left',
-          attrs: {
-            circle: {
-              r: 4,
-              magnet: true,
-              stroke: '#5F95FF',
-              strokeWidth: 1,
-              fill: '#fff',
-              style: {
-                visibility: 'hidden',
-              },
-            },
-          },
-        },
-      },
-      items: [
-        {
-          group: 'top',
-          id: '4b9a6562-5dab-483d-ad3a-6da043302ae6',
-        },
-        {
-          group: 'right',
-          id: '9b57dd06-650c-4d66-afdc-5ca6f4ac35a2',
-        },
-        {
-          group: 'bottom',
-          id: '0450858e-ef75-4017-b3c5-5a65ee9a12e9',
-        },
-        {
-          group: 'left',
-          id: 'f2fb29c9-b112-4397-b6a7-8cea35f45814',
-        },
-      ],
-    },
-    id: '916046dd-a6a4-4ea2-a11e-1a931c94aa30',
-    zIndex: 5,
-  },
-  {
-    position: {
-      x: -345,
-      y: -490,
-    },
-    size: {
-      width: 120,
-      height: 40,
-    },
-    attrs: {
-      text: {
-        text: '方形节点',
-      },
-    },
-    visible: true,
-    shape: 'custom-rect',
-    ports: {
-      groups: {
-        top: {
-          position: 'top',
-          attrs: {
-            circle: {
-              r: 4,
-              magnet: true,
-              stroke: '#5F95FF',
-              strokeWidth: 1,
-              fill: '#fff',
-              style: {
-                visibility: 'hidden',
-              },
-            },
-          },
-        },
-        right: {
-          position: 'right',
-          attrs: {
-            circle: {
-              r: 4,
-              magnet: true,
-              stroke: '#5F95FF',
-              strokeWidth: 1,
-              fill: '#fff',
-              style: {
-                visibility: 'hidden',
-              },
-            },
-          },
-        },
-        bottom: {
-          position: 'bottom',
-          attrs: {
-            circle: {
-              r: 4,
-              magnet: true,
-              stroke: '#5F95FF',
-              strokeWidth: 1,
-              fill: '#fff',
-              style: {
-                visibility: 'hidden',
-              },
-            },
-          },
-        },
-        left: {
-          position: 'left',
-          attrs: {
-            circle: {
-              r: 4,
-              magnet: true,
-              stroke: '#5F95FF',
-              strokeWidth: 1,
-              fill: '#fff',
-              style: {
-                visibility: 'hidden',
-              },
-            },
-          },
-        },
-      },
-      items: [
-        {
-          group: 'top',
-          id: '904f842d-3136-4ab9-acd3-190ce7a8b4e0',
-        },
-        {
-          group: 'right',
-          id: '349ee74a-1c7a-4b89-b89d-dfb61408b899',
-        },
-        {
-          group: 'bottom',
-          id: '8e160aec-efa1-44e8-a8c6-e9ca18e6870b',
-        },
-        {
-          group: 'left',
-          id: 'a64be19a-0963-46aa-a710-fe4f6f11fc56',
-        },
-      ],
-    },
-    id: 'd3a528bf-b046-489d-8517-5429cd97df23',
-    zIndex: 6,
-  },
-  {
-    position: {
-      x: -250,
-      y: -410,
-    },
-    size: {
-      width: 128,
-      height: 20,
-    },
-    attrs: {
-      text: {
-        text: '方形细长节点',
-      },
-    },
-    visible: true,
-    shape: 'custom-rect-small',
-    ports: {
-      groups: {
-        top: {
-          position: 'top',
-          attrs: {
-            circle: {
-              r: 4,
-              magnet: true,
-              stroke: '#5F95FF',
-              strokeWidth: 1,
-              fill: '#fff',
-              style: {
-                visibility: 'hidden',
-              },
-            },
-          },
-        },
-        right: {
-          position: 'right',
-          attrs: {
-            circle: {
-              r: 4,
-              magnet: true,
-              stroke: '#5F95FF',
-              strokeWidth: 1,
-              fill: '#fff',
-              style: {
-                visibility: 'hidden',
-              },
-            },
-          },
-        },
-        bottom: {
-          position: 'bottom',
-          attrs: {
-            circle: {
-              r: 4,
-              magnet: true,
-              stroke: '#5F95FF',
-              strokeWidth: 1,
-              fill: '#fff',
-              style: {
-                visibility: 'hidden',
-              },
-            },
-          },
-        },
-        left: {
-          position: 'left',
-          attrs: {
-            circle: {
-              r: 4,
-              magnet: true,
-              stroke: '#5F95FF',
-              strokeWidth: 1,
-              fill: '#fff',
-              style: {
-                visibility: 'hidden',
-              },
-            },
-          },
-        },
-      },
-      items: [
-        {
-          group: 'top',
-          id: '4b9a6562-5dab-483d-ad3a-6da043302ae6',
-        },
-        {
-          group: 'right',
-          id: '9b57dd06-650c-4d66-afdc-5ca6f4ac35a2',
-        },
-        {
-          group: 'bottom',
-          id: '0450858e-ef75-4017-b3c5-5a65ee9a12e9',
-        },
-        {
-          group: 'left',
-          id: 'f2fb29c9-b112-4397-b6a7-8cea35f45814',
-        },
-      ],
-    },
-    id: 'a09a98f7-181c-4ff6-b43f-2a584f11edc7',
-    zIndex: 7,
-  },
-  {
-    position: {
-      x: -250,
-      y: -344,
-    },
-    size: {
-      width: 128,
-      height: 20,
-    },
-    attrs: {
-      text: {
-        text: '方形细长节点',
-      },
-    },
-    visible: true,
-    shape: 'custom-rect-small',
-    ports: {
-      groups: {
-        top: {
-          position: 'top',
-          attrs: {
-            circle: {
-              r: 4,
-              magnet: true,
-              stroke: '#5F95FF',
-              strokeWidth: 1,
-              fill: '#fff',
-              style: {
-                visibility: 'hidden',
-              },
-            },
-          },
-        },
-        right: {
-          position: 'right',
-          attrs: {
-            circle: {
-              r: 4,
-              magnet: true,
-              stroke: '#5F95FF',
-              strokeWidth: 1,
-              fill: '#fff',
-              style: {
-                visibility: 'hidden',
-              },
-            },
-          },
-        },
-        bottom: {
-          position: 'bottom',
-          attrs: {
-            circle: {
-              r: 4,
-              magnet: true,
-              stroke: '#5F95FF',
-              strokeWidth: 1,
-              fill: '#fff',
-              style: {
-                visibility: 'hidden',
-              },
-            },
-          },
-        },
-        left: {
-          position: 'left',
-          attrs: {
-            circle: {
-              r: 4,
-              magnet: true,
-              stroke: '#5F95FF',
-              strokeWidth: 1,
-              fill: '#fff',
-              style: {
-                visibility: 'hidden',
-              },
-            },
-          },
-        },
-      },
-      items: [
-        {
-          group: 'top',
-          id: '4b9a6562-5dab-483d-ad3a-6da043302ae6',
-        },
-        {
-          group: 'right',
-          id: '9b57dd06-650c-4d66-afdc-5ca6f4ac35a2',
-        },
-        {
-          group: 'bottom',
-          id: '0450858e-ef75-4017-b3c5-5a65ee9a12e9',
-        },
-        {
-          group: 'left',
-          id: 'f2fb29c9-b112-4397-b6a7-8cea35f45814',
-        },
-      ],
-    },
-    id: 'eb8909ae-4110-41fe-8495-509543b89441',
-    zIndex: 8,
-  },
-  {
-    position: {
-      x: -250,
-      y: -270,
-    },
-    size: {
-      width: 128,
-      height: 20,
-    },
-    attrs: {
-      text: {
-        text: '方形细长节点',
-      },
-    },
-    visible: true,
-    shape: 'custom-rect-small',
-    ports: {
-      groups: {
-        top: {
-          position: 'top',
-          attrs: {
-            circle: {
-              r: 4,
-              magnet: true,
-              stroke: '#5F95FF',
-              strokeWidth: 1,
-              fill: '#fff',
-              style: {
-                visibility: 'hidden',
-              },
-            },
-          },
-        },
-        right: {
-          position: 'right',
-          attrs: {
-            circle: {
-              r: 4,
-              magnet: true,
-              stroke: '#5F95FF',
-              strokeWidth: 1,
-              fill: '#fff',
-              style: {
-                visibility: 'hidden',
-              },
-            },
-          },
-        },
-        bottom: {
-          position: 'bottom',
-          attrs: {
-            circle: {
-              r: 4,
-              magnet: true,
-              stroke: '#5F95FF',
-              strokeWidth: 1,
-              fill: '#fff',
-              style: {
-                visibility: 'hidden',
-              },
-            },
-          },
-        },
-        left: {
-          position: 'left',
-          attrs: {
-            circle: {
-              r: 4,
-              magnet: true,
-              stroke: '#5F95FF',
-              strokeWidth: 1,
-              fill: '#fff',
-              style: {
-                visibility: 'hidden',
-              },
-            },
-          },
-        },
-      },
-      items: [
-        {
-          group: 'top',
-          id: '4b9a6562-5dab-483d-ad3a-6da043302ae6',
-        },
-        {
-          group: 'right',
-          id: '9b57dd06-650c-4d66-afdc-5ca6f4ac35a2',
-        },
-        {
-          group: 'bottom',
-          id: '0450858e-ef75-4017-b3c5-5a65ee9a12e9',
-        },
-        {
-          group: 'left',
-          id: 'f2fb29c9-b112-4397-b6a7-8cea35f45814',
-        },
-      ],
-    },
-    id: 'f6824920-6556-4c5f-8e5a-16d7a5eb51d1',
-    zIndex: 9,
   },
 ]
 export default nodeData
