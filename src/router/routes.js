@@ -316,6 +316,30 @@ const routes = [
     },
     component: () => import('../views/testPage/index.vue'),
   },
+  {
+    path: '/productList',
+    name: 'productList',
+    meta: {
+      name: '商品列表',
+    },
+    component: () => import('../views/productList/ProductList.vue'),
+  },
+  {
+    path: '/dynamicPropsDrawer',
+    name: 'dynamicPropsDrawer',
+    meta: {
+      name: '动态属性抽屉',
+    },
+    component: () => import('../views/dynamicProps/DynamicPropsDrawer.vue'),
+  },
+  {
+    path: '/aboutList',
+    name: 'aboutList',
+    meta: {
+      name: '列表',
+    },
+    component: () => import('../views/aboutList/index.vue'),
+  },
 ]
 
 export default routes
