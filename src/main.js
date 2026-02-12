@@ -12,6 +12,8 @@ import DraggableDialog from './directives/draggableDialog'
 import SuperFlow from 'vue-super-flow'
 import 'vue-super-flow/lib/index.css'
 
+import triggerBySearchBar from '@/utils/triggerBySearchBar.js'
+
 Vue.config.productionTip = false
 
 Vue.use(ElementUI, { size: 'small', zIndex: 3000 })
@@ -19,6 +21,8 @@ Vue.use(JsonViewer)
 Vue.use(SuperFlow)
 
 Vue.directive('draggable-dialog', DraggableDialog)
+
+Vue.prototype.$triggerBySearchBar = triggerBySearchBar
 
 new Vue({
   router,

@@ -1,51 +1,25 @@
 <template>
-  <div class="custom-page">
-    <div class="custom-search-bar">
-      <el-form :model="searchForm" ref="formRef" inline>
-        <el-form-item prop="prop1">
-          <el-input v-model="searchForm.prop1" placeholder="字段1" clearable></el-input>
-        </el-form-item>
-        <el-form-item prop="prop2">
-          <el-input
-            v-model="searchForm.prop2"
-            placeholder="假如字段2的label很长"
-            clearable
-          ></el-input>
-        </el-form-item>
-        <el-form-item prop="prop3">
-          <el-input
-            v-model="searchForm.prop3"
-            placeholder="假如字段3的label很长很长很长很长"
-            clearable
-          ></el-input>
-        </el-form-item>
-        <el-form-item>
-          <el-button type="primary">搜索</el-button>
-          <el-button @click="onReset">重置</el-button>
-        </el-form-item>
-      </el-form>
+  <div class="page">
+    <div class="left">
+      <!-- <div class="custom-page"> -->
+      <listPage />
+      <!-- </div> -->
     </div>
-    <div class="custom-content">
-      <div class="custom-btns">
-        <el-button type="primary" @click="onOpenDialog">弹窗</el-button>
-        <el-button type="primary" @click="onOpenDrawer">抽屉</el-button>
-        <el-button type="primary" @click="onMessage">消息提示</el-button>
-        <el-button type="primary" @click="onNotification">通知</el-button>
+    <div class="right">
+      <div class="custom-page">
+        <div class="custom-content">
+          <div v-html="mdData" class="markdown-body theme-atom-one-dark" style="height: 100%; overflow: auto"></div>
+        </div>
       </div>
-      <div
-        v-html="mdData"
-        class="markdown-body theme-atom-one-dark"
-        style="height: 100%; overflow: auto"
-      ></div>
     </div>
-    <dialogByUX :visible.sync="visibleByDialog" />
-    <drawerByUX :visible.sync="visibleByDrawer" />
   </div>
 </template>
 
 <script>
-import dialogByUX from './components/dialogByUX.vue'
-import drawerByUX from './components/drawerByUX.vue'
+// import dialogByUX from './components/dialogByUX.vue'
+// import drawerByUX from './components/drawerByUX.vue'
+
+import listPage from './listPage.vue'
 
 import markdownFile from './aboutUX.md'
 
@@ -58,8 +32,9 @@ import 'github-markdown-css'
 export default {
   name: 'aboutUX',
   components: {
-    dialogByUX,
-    drawerByUX,
+    // dialogByUX,
+    // drawerByUX,
+    listPage,
   },
   data() {
     return {
@@ -104,3 +79,19 @@ export default {
   },
 }
 </script>
+
+<style lang="less" scoped>
+.page {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  // display: flex;
+  // flex-direction: column;
+  display: grid;
+  grid-template-columns: 1fr 600px;
+  .left,
+  .right {
+    overflow: auto;
+  }
+}
+</style>
