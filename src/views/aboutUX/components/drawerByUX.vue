@@ -1,5 +1,5 @@
 <template>
-  <el-drawer title="提示" :visible.sync="isShow" size="50%">
+  <el-drawer title="提示" :visible.sync="isShow" size="50%" :wrapperClosable="false">
     <div class="drawer-content">
       <div class="drawer-form">
         <el-form ref="form" :model="form" label-width="80px">
@@ -23,11 +23,7 @@
             </el-col>
             <el-col class="line" :span="2">-</el-col>
             <el-col :span="11">
-              <el-time-picker
-                placeholder="选择时间"
-                v-model="form.date2"
-                style="width: 100%"
-              ></el-time-picker>
+              <el-time-picker placeholder="选择时间" v-model="form.date2" style="width: 100%"></el-time-picker>
             </el-col>
           </el-form-item>
           <el-form-item label="即时配送">

@@ -1,5 +1,5 @@
 <template>
-  <el-dialog title="提示" :visible.sync="isShow" width="50%">
+  <el-dialog title="提示" :visible.sync="isShow" width="50%" :close-on-click-modal="false">
     <el-form ref="form" :model="form" label-width="80px">
       <el-form-item label="活动名称">
         <el-input v-model="form.name"></el-input>
