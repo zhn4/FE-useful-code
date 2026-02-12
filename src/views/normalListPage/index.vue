@@ -1,11 +1,11 @@
 <template>
   <div class="custom-page">
     <div class="custom-search-bar">
-      <el-form ref="form" :model="form" label-width="80px" :inline="true">
-        <el-form-item label="任务名称">
-          <el-input v-model="form.name"></el-input>
+      <el-form ref="formRef" :model="form" label-width="80px" :inline="true">
+        <el-form-item label="任务名称" prop="name">
+          <el-input v-model="form.name" placeholder="任务名称" clearable></el-input>
         </el-form-item>
-        <el-form-item label="归档时间">
+        <el-form-item label="归档时间" prop="time">
           <el-date-picker
             v-model="form.time"
             type="daterange"
@@ -15,10 +15,10 @@
           ></el-date-picker>
         </el-form-item>
         <el-form-item>
-          <el-button type="primary" @click="onSearch" icon="el-icon-search">查询</el-button>
+          <el-button type="primary" @click="onSearch" :loading="loading" icon="el-icon-search">查询</el-button>
         </el-form-item>
         <el-form-item>
-          <el-button @click="onReset" icon="el-icon-refresh-right">重置</el-button>
+          <el-button @click="onReset" :loading="loading" icon="el-icon-refresh-right">重置</el-button>
         </el-form-item>
       </el-form>
     </div>
@@ -62,6 +62,7 @@ export default {
   name: 'NormalListPage',
   data() {
     return {
+      loading: false,
       form: {
         name: '',
         time: [],
@@ -84,8 +85,20 @@ export default {
     }
   },
   methods: {
-    onSearch() {},
-    onReset() {},
+    fetchData() {
+      this.loading = true
+      // 模拟发送请求
+      setTimeout(() => {
+        this.loading = false
+      }, 1000)
+    },
+    onSearch() {
+      this.fetchData()
+    },
+    onReset() {
+      this.$refs.formRef.resetFields()
+      this.fetchData()
+    },
     onCheck() {},
     onDelete() {},
     handleSizeChange(val) {},
