@@ -15,22 +15,21 @@
 
 <script>
 export default {
-  name: 'Parent',
+  name: 'ParentComponent',
   methods: {
     useParentObject() {
-      console.log('%c $parent 调用', 'color: white; background-color: red;')
+      console.log('%c $parent 调用', 'color: white; background-color: red; font-size: 16px;')
       this.$parent.onSubmit() // 获取父级实例，可以看到slot里的组件实例方法
     },
     useEmitMethod() {
-      console.log('%c $emt 调用', 'color: white; background-color: green;')
+      console.log('%c $emt 调用', 'color: white; background-color: green;  font-size: 16px;')
       this.$emit('emitTrigger', {
         msg: '父级组件，使用 $emit 调用插槽内容方法',
       })
     },
     handleGetSlotData(data) {
-      console.log('%c step2 父组件接收插槽内容的数据', 'color: gold; background-color: #333;')
+      console.log('%c step2 父组件接收插槽内容的数据', 'color: gold; background-color: #333; font-size: 16px;')
       console.log(data)
-      console.log('======')
     },
   },
 }

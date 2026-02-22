@@ -52,8 +52,9 @@ export default {
   },
   methods: {
     onSubmit(val) {
+      console.log(`%c onSubmit => `, `color: white; background-color: #409EFF; font-size: 16px; font-weight: bold;`)
       console.log(val)
-      this.$refs.formRef.validate((valid) => {
+      this.$refs.formRef.validate(valid => {
         if (valid) {
           this.handleSubmit()
         } else {
@@ -71,7 +72,7 @@ export default {
       console.log('======')
     },
     onSubmitByParent() {
-      console.log('%c step1 插槽内容调用父组件方法', 'color: #333; background-color: gold;')
+      console.log('%c step1 插槽内容调用父组件方法', 'color: #333; background-color: gold; font-size: 16px;')
       let currentData = { ...this.form }
       this.$refs.parentRef.handleGetSlotData(currentData)
     },
