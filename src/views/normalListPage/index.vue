@@ -76,11 +76,11 @@ export default {
   },
   mounted() {
     let i = 0
-    while (i < 20) {
+    while (i < 50) {
       i++
       this.tableData.push({
         date: `fake-data-${i}`,
-        desc: `时间戳：${new Date().getTime().toString()}`,
+        desc: `备注： 看看时间 ${new Date()}`,
       })
     }
   },
@@ -90,7 +90,7 @@ export default {
       // 模拟发送请求
       setTimeout(() => {
         this.loading = false
-      }, 1000)
+      }, 300)
     },
     onSearch() {
       this.fetchData()
