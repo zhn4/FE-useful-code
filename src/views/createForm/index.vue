@@ -7,7 +7,15 @@
           <el-table-column prop="txt" label="问题内容" align="center">
             <template slot-scope="scope">
               <el-form-item :prop="`tableData.${scope.$index}.txt`" :rules="rules.txt">
-                <el-input v-model.trim="scope.row.txt" maxlength="20" placeholder="请输入" />
+                <el-input
+                  type="textarea"
+                  v-model.trim="scope.row.txt"
+                  maxlength="100"
+                  placeholder="请输入"
+                  :rows="6"
+                  resize="none"
+                  show-word-limit
+                />
               </el-form-item>
             </template>
           </el-table-column>
@@ -127,7 +135,7 @@
 import SmallTable from './components/smallTable.vue'
 
 export default {
-  name: 'createForm',
+  name: 'CreateForm',
   components: {
     SmallTable,
   },
