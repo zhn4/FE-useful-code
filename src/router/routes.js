@@ -221,6 +221,14 @@ const routes = [
     component: () => import('../views/tvStream/index.vue'),
   },
   {
+    path: '/liveStreamInput',
+    name: 'liveStreamInput',
+    meta: {
+      name: '直播源输入播放',
+    },
+    component: () => import('../views/liveStreamInput/index.vue'),
+  },
+  {
     path: '/consoleCollect',
     name: 'consoleCollect',
     meta: {
